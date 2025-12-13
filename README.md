@@ -55,6 +55,20 @@ You can trigger updates directly from Lightroom!
 
 ---
 
+## 🔄 Multi-Computer Workflow
+
+To prevent out-of-sync issues when using multiple computers (e.g., Desktop & Laptop):
+
+1.  **Before starting work**:
+    Run the sync script to pull the latest changes from GitHub.
+    ```bash
+    ./sync.sh
+    ```
+2.  **Publishing**:
+    The `./publish.sh` script now automatically pulls changes before pushing, but it's best practice to run `sync.sh` first if you know you made changes elsewhere.
+
+---
+
 ## 🛠 Local Development (New Computer Setup)
 
 If you are setting this up on a new Mac:

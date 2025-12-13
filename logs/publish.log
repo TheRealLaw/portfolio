@@ -85,3 +85,21 @@ To https://github.com/TheRealLaw/portfolio.git
    bba5ac6..e6d05d2  main -> main
 --- Publish Complete ---
 --- Starting Publish: Sat Dec 13 14:03:39 PST 2025 ---
+[main 5ea03c3] Portfolio Update: 2025-12-13 14:03:39
+ 2 files changed, 8 insertions(+), 2 deletions(-)
+To https://github.com/TheRealLaw/portfolio.git
+   e6d05d2..5ea03c3  main -> main
+--- Publish Complete ---
+--- Starting Publish: Sat Dec 13 14:23:32 PST 2025 ---
+--- specific sync step start ---
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
+❌ CRITICAL ERROR: Git pull failed. You likely have conflicts.
+Please resolve conflicts manually on the computer.
+--- Starting Publish: Sat Dec 13 14:25:43 PST 2025 ---
+--- specific sync step start ---
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
+❌ CRITICAL ERROR: Git pull failed. You likely have conflicts.
+Please resolve conflicts manually on the computer.
+--- Starting Publish: Sat Dec 13 14:27:58 PST 2025 ---
