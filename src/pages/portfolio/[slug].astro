@@ -1,0 +1,146 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Lightbox from '../../components/Lightbox.astro';
+import type { ImageMetadata } from 'astro';
+import fs from 'node:fs';
+import nodePath from 'node:path';
+import ExifReader from 'exifreader';
+
+export async function getStaticPaths() {
+  const allContent = import.meta.glob('/src/content/portfolio/*/*', { eager: true });
+  const collections = new Set<string>();
+
+  for (const path in allContent) {
+    const parts = path.split('/');
+    // /src/content/portfolio/[collection]/[file]
+    if (parts[4]) {
+      collections.add(parts[4]);
+    }
+  }
+
+  return Array.from(collections).map((slug) => ({
+    params: { slug },
+  }));
+}
+
+const { slug } = Astro.params;
+
+// Fetch images for this collection
+// Note: We scan all and filter because import.meta.glob with template literals is tricky if not known at build time slightly differently,
+// but for getStaticPaths it worked. In the component body, we verify.
+// Actually, to get images for THIS slug, we can use a glob pattern that matches everything and filter.
+// Or we can rely on the fact that we know the slug.
+// `import.meta.glob` must have static arguments generally, but inside `getStaticPaths` we used it.
+// Here we are inside the component. We can reuse the glob from file scope or pass data.
+// Passing data via `props` in `getStaticPaths` is better.
+
+const allImages = import.meta.glob('/src/content/portfolio/**/*.{jpg,png,jpeg,webp}', { eager: true });
+const collectionImages: { src: string | ImageMetadata, title: string, path: string }[] = [];
+
+for (const path in allImages) {
+  if (path.includes(`/src/content/portfolio/${slug}/`)) {
+    const parts = path.split('/');
+    const filename = parts[parts.length - 1];
+    // Exclude cover if we want, or keep it. PRD says "Masonry or Justified Grid of all images".
+    // Usually cover is included.
+    const mod = allImages[path] as any;
+    collectionImages.push({
+      src: mod.default || mod,
+      title: filename,
+      path // Add path here
+    });
+  }
+}
+
+
+
+
+
+// Helper to get image metadata
+const imagesWithMetadata = await Promise.all(collectionImages.map(async (img) => {
+  const meta = img.src as ImageMetadata;
+  
+  // Resolve absolute path for EXIF reading
+  const absolutePath = nodePath.join(process.cwd(), img.path.startsWith('/') ? img.path.slice(1) : img.path);
+  
+  let exifData = null;
+  try {
+    const fileBuffer = fs.readFileSync(absolutePath);
+    const tags = ExifReader.load(fileBuffer);
+
+    // Convert DMS to Decimal
+    const convertToDecimal = (gpsTags: any, refTag: any) => {
+       if (!gpsTags || !refTag) return null;
+       // ExifReader returns value as array of numbers [degrees, minutes, seconds] usually, OR as string description?
+       // tags.GPSLatitude.description is string "34, 4, 0.0" 
+       // tags.GPSLatitude.value is array [34, 4, 0] usually
+       const dms = gpsTags.value;
+       const ref = refTag.value[0]; // Ref is usually array ["N"]
+       
+       if (!dms || dms.length < 3) return null;
+
+       let decimal = dms[0] + dms[1] / 60 + dms[2] / 3600;
+       if (ref === 'S' || ref === 'W') {
+         decimal = decimal * -1;
+       }
+       return decimal.toFixed(6); // 6 decimal places is enough precision
+    };
+    
+    // Extract relevant fields safely
+    exifData = {
+      model: tags.Model?.description || '',
+      lens: tags.LensModel?.description || '',
+      focalLength: tags.FocalLength?.description || '',
+      fNumber: tags.FNumber?.description || '',
+      iso: tags.ISOSpeedRatings?.description || '',
+      exposure: tags.ExposureTime?.description || '',
+      date: tags.DateTimeOriginal?.description || '',
+      software: tags.Software?.description || '',
+      gps: {
+        lat: convertToDecimal(tags.GPSLatitude, tags.GPSLatitudeRef), 
+        lon: convertToDecimal(tags.GPSLongitude, tags.GPSLongitudeRef)
+      }
+    };
+  } catch (e) {
+    console.warn(`Failed to read EXIF for ${img.path}`, e);
+  }
+
+  return {
+    ...img,
+    width: meta.width,
+    height: meta.height,
+    src: meta.src,
+    exif: exifData
+  };
+}));
+---
+
+<Layout title={`${slug ? slug.charAt(0).toUpperCase() + slug.slice(1) : 'Collection'} | Leo Wuellner`}>
+  <div class="mb-8">
+    <h1 class="text-3xl font-bold uppercase tracking-widest">{slug}</h1>
+  </div>
+
+  <div id="gallery" class="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
+    {imagesWithMetadata.map((img) => (
+      <a 
+        href={img.src} 
+        data-pswp-width={img.width} 
+        data-pswp-height={img.height}
+        data-exif={JSON.stringify(img.exif)} 
+        target="_blank"
+        class="block break-inside-avoid mb-6 group cursor-zoom-in"
+      >
+        <div class="overflow-hidden bg-gray-100">
+          <img 
+            src={img.src} 
+            alt={img.title} 
+            class="w-full h-auto transition-transform duration-700 ease-in-out group-hover:scale-105"
+            loading="lazy"
+          />
+        </div>
+      </a>
+    ))}
+  </div>
+  
+  <Lightbox />
+</Layout>

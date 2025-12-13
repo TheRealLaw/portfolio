@@ -1,0 +1,45 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import bioImage from '../content/portfolio/bio.jpeg';
+---
+
+<Layout title="Bio | Leo Wuellner">
+  <div class="flex flex-col md:flex-row gap-12 items-start justify-center pt-8">
+    {/* Left Column: Image */}
+    <div class="w-full md:w-1/2 lg:w-5/12">
+      <Image 
+        src={bioImage} 
+        alt="Leo Wuellner" 
+        class="w-full h-auto shadow-sm"
+        loading="eager"
+      />
+    </div>
+
+    {/* Right Column: Text */}
+    <div class="w-full md:w-1/2 lg:w-5/12 flex flex-col justify-center">
+      <h1 class="text-3xl md:text-4xl font-normal uppercase tracking-[0.2em] mb-8 text-black">
+        Leo Wuellner
+      </h1>
+      
+      <div class="prose prose-neutral prose-lg font-light leading-relaxed text-gray-700">
+        <p class="mb-6">
+          I am a photographer based in... [City, Country].
+        </p>
+        <p class="mb-6">
+          My work focuses on minimalism and collecting moments from around the world.
+          I strive to capture the silent beauty in everyday scenes, turning the ordinary into the extraordinary through careful composition and light.
+        </p>
+        <p>
+          Available for commissions and prints.
+        </p>
+      </div>
+
+      <div class="mt-12">
+        <a href="mailto:contact@leowuellner.com" class="inline-block border-b border-black pb-1 uppercase tracking-widest text-sm hover:text-gray-600 hover:border-gray-600 transition-colors">
+          Get in Touch
+        </a>
+      </div>
+    </div>
+  </div>
+</Layout>

@@ -1,0 +1,42 @@
+---
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+
+interface Props {
+  title: string;
+  href: string;
+  coverImage: ImageMetadata | string; // Accept string path or imported image
+}
+
+const { title, href, coverImage } = Astro.props;
+
+// Helper to determine if coverImage is a string path or ImageMetadata
+// Helper to determine if coverImage is a string path or ImageMetadata
+const isStringPath = typeof coverImage === 'string';
+const imgSrc = coverImage 
+  ? (isStringPath ? (coverImage as string) : (coverImage as ImageMetadata).src)
+  : ''; // Fallback or empty
+---
+
+<a href={href} class="group block relative mb-6 break-inside-avoid">
+  <div class="relative overflow-hidden bg-gray-100">
+    {imgSrc && (
+      <img 
+        src={imgSrc} 
+        alt={title} 
+        class="w-full h-auto block transition-opacity duration-500 group-hover:opacity-90"
+      />
+    )}
+    {!imgSrc && (
+      <div class="w-full h-64 flex items-center justify-center text-gray-400">
+        No Cover Image
+      </div>
+    )}
+  </div>
+  
+  <div class="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/10 transition-colors duration-300 p-4">
+    <h2 class="text-white text-center text-xl md:text-2xl font-bold uppercase tracking-widest opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 drop-shadow-md">
+      {title}
+    </h2>
+  </div>
+</a>

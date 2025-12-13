@@ -1,0 +1,25 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+// For now, we'll just pull a random selection of images or hardcode placeholders
+// In a real scenario, this might come from a specific folder or 'best-of' collection.
+const demoImages = [
+  'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=800&q=80',
+  'https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format&fit=crop&w=800&q=80',
+  'https://images.unsplash.com/photo-1554080353-a576cf803bda?auto=format&fit=crop&w=800&q=80',
+];
+// Since we don't have internet access for client-side non-browser fetches, these URLs will work in the browser.
+---
+
+<Layout title="Top 20 Shots | Leo Wuellner">
+  <div class="mb-8">
+    <h1 class="text-3xl font-bold uppercase tracking-widest">Top 20 Shots</h1>
+  </div>
+
+  <div class="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
+    {/* Using some placeholder logic or reusing local images if we had more */}
+    <div class="break-inside-avoid bg-gray-100 p-8 text-center text-gray-500">
+      <p>Curated gallery coming soon.</p>
+    </div>
+  </div>
+</Layout>
