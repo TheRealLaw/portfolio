@@ -88,6 +88,26 @@ If you are setting this up on a new Mac:
     npm run dev
     ```
 
+### 🔐 Multi-Computer Path Fix (User Alias)
+If your username is different on each computer (e.g. `leo` vs `LeoWuellner`), Lightroom will get confused.
+You can fix this by "aliasing" the username so both paths exist on both computers.
+
+**On computer A (User: `leo`):**
+Run this to make `/Users/LeoWuellner` point to your actual home:
+```bash
+sudo ln -s /Users/leo /Users/LeoWuellner
+```
+
+**On computer B (User: `LeoWuellner`):**
+Run this to make `/Users/leo` point to your actual home:
+```bash
+sudo ln -s /Users/LeoWuellner /Users/leo
+```
+
+**Result:**
+You can now use `/Users/leo/Code/portfolio` OR `/Users/LeoWuellner/Code/portfolio` interchangeably on EITHER machine, and they will always work!
+Update Lightroom to use one of them (pick one and stick to it), and it will sync perfectly.
+
 Visit `http://localhost:4321` to view the site.
 
 ## 📁 Project Structure

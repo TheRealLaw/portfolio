@@ -24,6 +24,9 @@ else
     echo "✓ Git is installed"
 fi
 
+# Increase git buffer size for large image uploads (500MB) to prevent RPC 400 errors
+git config http.postBuffer 524288000
+
 # 4. Check/Install GitHub CLI (useful for auth)
 if ! command -v gh &> /dev/null; then
     echo "Installing GitHub CLI (gh)..."

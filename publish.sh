@@ -8,6 +8,9 @@ PROJECT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 LOG_FILE="$PROJECT_DIR/logs/publish.log"
 
 # --- EXECUTION ---
+# Increase git buffer size for large image uploads (500MB)
+git config http.postBuffer 524288000
+
 echo "--- Starting Publish: $(date) ---" >> "$LOG_FILE"
 
 # Navigate to project directory
