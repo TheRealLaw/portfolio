@@ -39,17 +39,19 @@ const { heroImage } = Astro.props;
        <nav>
         <ul class="flex items-center gap-8">
           {navItems.map((item) => (
-            <li class="relative group">
+            <li class="relative group nav-item">
               <a 
                 href={item.href}
+                data-has-dropdown={!!item.dropdown}
                 class:list={[
-                  "text-sm font-medium uppercase tracking-widest transition-colors flex items-center gap-1 text-white/90 hover:text-white",
-                  currentPath === item.href ? "border-b border-white pb-1" : ""
+                  "text-sm font-medium uppercase tracking-widest transition-colors flex items-center gap-1 cursor-pointer",
+                  currentPath === item.href ? "border-b border-white pb-1" : "text-white/90 hover:text-white",
+                  item.dropdown ? "dropdown-trigger" : ""
                 ]}
               >
                 {item.name}
                 {item.dropdown && (
-                   <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 opacity-70" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                   <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 opacity-70 transition-transform duration-200 group-[.open]:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                    </svg>
                 )}
@@ -57,7 +59,19 @@ const { heroImage } = Astro.props;
               
               {/* Dropdown (Darker for Hero?) or White? keeping white for consistency, handling text color */}
               {item.dropdown && (
-                <div class="absolute top-full left-1/2 -translate-x-1/2 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 min-w-[200px]">
+                <div class="absolute top-full left-1/2 -translate-x-1/2 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-[.open]:opacity-100 group-[.open]:visible transition-all duration-200 min-w-[200px]">
+                  <div class="bg-white border text-center border-gray-100 shadow-xl rounded-sm py-2 px-1">
+                    {item.dropdown.map((subItem) => (
+                      <a 
+                        href={subItem.href}
+                        class="block px-4 py-3 text-xs text-gray-500 hover:text-black hover:bg-gray-50 uppercase tracking-wider transition-colors"
+                      >
+                        {subItem.name}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              )}
                   <div class="bg-white border text-center border-gray-100 shadow-xl rounded-sm py-2 px-1">
                     {item.dropdown.map((subItem) => (
                       <a 

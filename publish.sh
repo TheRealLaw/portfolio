@@ -2,7 +2,8 @@
 
 # --- CONFIGURATION ---
 # Path to your web project (Change this to your actual path)
-PROJECT_DIR="$HOME/Code/leowuellner.com"
+# Path to your web project (Change this to your actual path)
+PROJECT_DIR="/Users/leo/Code/leowuellner.com"
 
 # Log file to debug if Lightroom actually triggers it
 LOG_FILE="$PROJECT_DIR/logs/publish.log"
