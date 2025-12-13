@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.leowuellner.portfolio.watcher</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <!-- PATH_PLACEHOLDER will be replaced by the install script -->
+        <string>PATH_PLACEHOLDER_WATCH</string>
+    </array>
+
+    <key>RunAtLoad</key>
+    <true/>
+
+    <key>KeepAlive</key>
+    <true/>
+
+    <key>StandardOutPath</key>
+    <string>PATH_PLACEHOLDER_LOG</string>
+
+    <key>StandardErrorPath</key>
+    <string>PATH_PLACEHOLDER_LOG</string>
+</dict>
+</plist>

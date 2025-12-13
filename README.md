@@ -34,24 +34,29 @@ The easiest way to publish changes (new photos, text updates, etc.) is using the
    3. Pushes to GitHub.
    4. **Which triggers Vercel to update your live site.**
 
-### 4. Lightroom Classic Integration
-You can trigger updates directly from Lightroom!
+### 4. Lightroom Integration (The "Monitor" Method)
 
-**One-Time Setup:**
-1.  Open Lightroom Classic -> **Publish Services** (bottom left).
-2.  Click `+` -> **Go to Publishing Manager**.
-3.  Add "Hard Drive" service. Name it "Web Portfolio".
-4.  **Export Location**: `.../leowuellner.com/src/content/portfolio`
-5.  **Image Sizing**: Resize to Fit -> Long Edge -> 2500 pixels.
-6.  **Post-Process Actions**:
-    - "After Export": Select "Open Application..."
-    - Browse and select your `publish.sh` file: `/Users/leo/Code/leowuellner.com/publish.sh`
+Since Lightroom's "Publish Service" is limited, we use a smarter approach: **A Monitoring Script**.
 
-**To Publish:**
-1.  Right-click "Web Portfolio".
-2.  Create a **Published Collection** (e.g., "Tokyo").
-3.  Drag photos in.
-4.  Click **Publish**. (This will export images + run the script to deploy).
+#### Option A: Run manually
+Open a terminal and run this command. (Requires window to stay open):
+```bash
+./watch.sh
+```
+
+#### Option B: Run in Background (Set and Forget)
+Install the script as a system service so it runs automatically when you log in!
+```bash
+./install_service.sh
+```
+*   **Logs**: Check `logs/watcher.log` to see it working.
+*   **Restart**: If you reboot, it starts itself.
+
+---
+
+**In Lightroom**:
+- Just **Export** your photos normally to `src/content/portfolio/[CollectionName]`.
+- The script detects the new files, waits 2 seconds, and auto-deploys.
 
 ---
 
