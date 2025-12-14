@@ -1,1 +1,92 @@
 @import "tailwindcss";
+
+/* Lightbox Overrides - Placed here to ensure they override default styles */
+/* Override PhotoSwipe background to white. Using body for higher specificity */
+body .pswp__bg {
+    background: #ffffff !important;
+}
+
+/* Invert icons to make them visible on white (Close, Zoom, Info get this) */
+body .pswp__icn {
+    filter: invert(1) !important;
+}
+
+/* Make arrows visible with white background */
+body .pswp__button--arrow--left,
+body .pswp__button--arrow--right {
+    background: rgba(255, 255, 255, 0.8) !important;
+    border-radius: 50%;
+    margin: 0 10px;
+    width: 44px !important;
+    height: 44px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+/* Keep icons black */
+body .pswp__button--arrow--left .pswp__icn,
+body .pswp__button--arrow--right .pswp__icn {
+    filter: brightness(0) !important;
+}
+
+.pswp__exif-panel {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border-radius: 12px;
+    max-width: 300px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transform: translateY(20px);
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 10000;
+    color: #333;
+    font-size: 13px;
+    font-family: sans-serif;
+}
+
+.pswp__exif-panel--open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.exif-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.exif-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.exif-item .label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #888;
+    margin-bottom: 2px;
+}
+
+.exif-item .value {
+    font-weight: 600;
+}
+
+.exif-row {
+    display: flex;
+    gap: 12px;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid #eee;
+    color: #555;
+    font-family: monospace;
+}

@@ -1,202 +1,157 @@
+---
+import "photoswipe/style.css";
+---
+
 <script>
-  import PhotoSwipeLightbox from 'photoswipe/lightbox';
-  import 'photoswipe/style.css';
+  import PhotoSwipeLightbox from "photoswipe/lightbox";
+  import PhotoSwipe from "photoswipe";
 
   const lightbox = new PhotoSwipeLightbox({
-    gallery: '#gallery',
-    children: 'a',
-    pswpModule: () => import('photoswipe'),
+    gallery: "#gallery",
+    children: "a",
+    pswpModule: PhotoSwipe,
     bgOpacity: 1.0,
     padding: { top: 40, bottom: 40, left: 100, right: 100 },
-    loop: false
+    loop: false,
   });
+  console.log("PhotoSwipe initialized for #gallery with children 'a'");
 
-  lightbox.on('uiRegister', function() {
-    lightbox.pswp.ui.registerElement({
-      name: 'info-btn',
+  if (!document.querySelector("#gallery")) {
+    console.error("Gallery element #gallery not found!");
+  } else {
+    console.log(
+      "Gallery element found, count of links:",
+      document.querySelectorAll("#gallery a").length,
+    );
+  }
+
+  lightbox.on("uiRegister", function () {
+    const pswp = lightbox.pswp;
+    if (!pswp || !pswp.ui) return;
+
+    pswp.ui.registerElement({
+      name: "info-btn",
       order: 9,
       isButton: true,
-      tagName: 'button',
+      tagName: "button",
       html: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>',
-      onClick: (event, el, pswp) => {
-        const infoPanel = document.querySelector('.pswp__exif-panel');
+      onClick: (event, el, pswpInstance) => {
+        const infoPanel = document.querySelector(".pswp__exif-panel");
         if (infoPanel) {
-          infoPanel.classList.toggle('pswp__exif-panel--open');
+          infoPanel.classList.toggle("pswp__exif-panel--open");
         }
+      },
+    });
+
+    pswp.on("close", () => {
+      const infoPanel = document.querySelector(".pswp__exif-panel");
+      if (infoPanel) {
+        infoPanel.classList.remove("pswp__exif-panel--open");
       }
     });
 
-    lightbox.pswp.on('close', () => {
-       const infoPanel = document.querySelector('.pswp__exif-panel');
-       if (infoPanel) {
-         infoPanel.classList.remove('pswp__exif-panel--open');
-       }
-    });
-
-    lightbox.pswp.ui.registerElement({
-      name: 'exif-panel',
-      appendTo: 'root',
-      onInit: (el, pswp) => {
-        el.className = 'pswp__exif-panel';
-        pswp.on('change', () => {
-          const currSlide = pswp.currSlide;
+    pswp.ui.registerElement({
+      name: "exif-panel",
+      appendTo: "root",
+      onInit: (el, pswpInstance) => {
+        el.className = "pswp__exif-panel";
+        pswpInstance.on("change", () => {
+          const currSlide = pswpInstance.currSlide;
           // data-exif is on the anchor tag, which is currSlide.data.element
           if (currSlide && currSlide.data.element) {
             const exifJson = currSlide.data.element.dataset.exif;
-            let content = '<p>No EXIF data available</p>';
-            
+            let content = "<p>No EXIF data available</p>";
+
             if (exifJson) {
               try {
                 const exif = JSON.parse(exifJson);
                 // Only show if we have meaningful data
-                if (exif.model || exif.lens || exif.date || (exif.gps && exif.gps.lat)) {
+                if (
+                  exif.model ||
+                  exif.lens ||
+                  exif.date ||
+                  (exif.gps && exif.gps.lat)
+                ) {
                   // Format Date
-                  let dateStr = '';
+                  let dateStr = "";
                   if (exif.date) {
-                    const parts = exif.date.split(' ');
+                    const parts = exif.date.split(" ");
                     if (parts.length >= 2) {
-                       dateStr = `${parts[0].replace(/:/g, '/')} ${parts[1].slice(0, 5)}`;
+                      dateStr = `${parts[0].replace(/:/g, "/")} ${parts[1].slice(0, 5)}`;
                     } else {
-                       dateStr = exif.date;
+                      dateStr = exif.date;
                     }
                   }
 
                   content = `
                     <div class="exif-grid">
-                      ${exif.date ? `<div class="exif-item"><span class="label">Time</span><span class="value">${dateStr}</span></div>` : ''}
-                      ${exif.model ? `<div class="exif-item"><span class="label">Camera</span><span class="value">${exif.model}</span></div>` : ''}
-                      ${exif.lens ? `<div class="exif-item"><span class="label">Lens</span><span class="value">${exif.lens}</span></div>` : ''}
+                      ${exif.date ? `<div class="exif-item"><span class="label">Time</span><span class="value">${dateStr}</span></div>` : ""}
+                      ${exif.model ? `<div class="exif-item"><span class="label">Camera</span><span class="value">${exif.model}</span></div>` : ""}
+                      ${exif.lens ? `<div class="exif-item"><span class="label">Lens</span><span class="value">${exif.lens}</span></div>` : ""}
                       <div class="exif-row">
-                        ${exif.iso ? `<span>ISO ${exif.iso}</span>` : ''}
-                        ${exif.fNumber ? `<span>${exif.fNumber}</span>` : ''}
-                        ${exif.exposure ? `<span>${exif.exposure}</span>` : ''}
+                        ${exif.iso ? `<span>ISO ${exif.iso}</span>` : ""}
+                        ${exif.fNumber ? `<span>${exif.fNumber}</span>` : ""}
+                        ${exif.exposure ? `<span>${exif.exposure}</span>` : ""}
                       </div>
-                      ${(exif.gps && exif.gps.lat) ? `<div class="exif-item" style="margin-top: 8px;"><span class="label">Location</span><span class="value loc-val" data-lat="${exif.gps.lat}" data-lon="${exif.gps.lon}">Loading coordinates...</span></div>` : ''}
+                      ${exif.gps && exif.gps.lat ? `<div class="exif-item" style="margin-top: 8px;"><span class="label">Location</span><span class="value loc-val" data-lat="${exif.gps.lat}" data-lon="${exif.gps.lon}">Loading coordinates...</span></div>` : ""}
                     </div>
                   `;
                 }
               } catch (e) {
-                console.error('Error parsing EXIF', e);
+                console.error("Error parsing EXIF", e);
               }
             }
             el.innerHTML = content;
-            
+
             // Trigger Reverse Geocoding if location element exists
-            const locEl = el.querySelector('.loc-val');
+            const locEl = el.querySelector(".loc-val");
             if (locEl) {
-               const lat = locEl.getAttribute('data-lat');
-               const lon = locEl.getAttribute('data-lon');
-               const cacheKey = `geo:${lat},${lon}`;
-               const cached = sessionStorage.getItem(cacheKey);
-               
-               if (cached) {
-                 locEl.textContent = cached;
-               } else {
-                 fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&zoom=10`)
-                   .then(res => res.json())
-                   .then(data => {
-                     let locationName = 'Unknown Location';
-                     if (data.address) {
-                       // Prefer City, Town, Village, then State, Country
-                       const city = data.address.city || data.address.town || data.address.village || data.address.county;
-                       const country = data.address.country;
-                       if (city && country) locationName = `${city}, ${country}`;
-                       else if (country) locationName = country;
-                       else locationName = data.display_name.split(',')[0];
-                     }
-                     locEl.textContent = locationName;
-                     sessionStorage.setItem(cacheKey, locationName);
-                   })
-                   .catch(err => {
-                     locEl.textContent = `${lat}, ${lon}`;
-                     console.error(err);
-                   });
-               }
+              const lat = locEl.getAttribute("data-lat");
+              const lon = locEl.getAttribute("data-lon");
+
+              if (!lat || !lon || lat === "NaN" || lon === "NaN") {
+                locEl.textContent = "Location data unavailable";
+                return;
+              }
+
+              const cacheKey = `geo:${lat},${lon}`;
+              const cached = sessionStorage.getItem(cacheKey);
+
+              if (cached) {
+                locEl.textContent = cached;
+              } else {
+                fetch(
+                  `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&zoom=10`,
+                )
+                  .then((res) => res.json())
+                  .then((data) => {
+                    let locationName = "Unknown Location";
+                    if (data.address) {
+                      // Prefer City, Town, Village, then State, Country
+                      const city =
+                        data.address.city ||
+                        data.address.town ||
+                        data.address.village ||
+                        data.address.county;
+                      const country = data.address.country;
+                      if (city && country) locationName = `${city}, ${country}`;
+                      else if (country) locationName = country;
+                      else locationName = data.display_name.split(",")[0];
+                    }
+                    locEl.textContent = locationName;
+                    sessionStorage.setItem(cacheKey, locationName);
+                  })
+                  .catch((err) => {
+                    locEl.textContent = `${lat}, ${lon}`;
+                    console.error(err);
+                  });
+              }
             }
           }
         });
-      }
+      },
     });
   });
 
   lightbox.init();
 </script>
-
-<style is:global>
-  /* Override PhotoSwipe background to white */
-  .pswp__bg {
-    background: #ffffff !important;
-  }
-  
-  /* Invert icons to make them visible on white (Close, Zoom, Info get this) */
-  .pswp__icn {
-    filter: invert(1) !important;
-  }
-
-  /* Make ONLY arrows solid black (no outline/shadow) */
-  .pswp__button--arrow--left .pswp__icn,
-  .pswp__button--arrow--right .pswp__icn {
-    filter: brightness(0) !important;
-  }
-  
-  .pswp__exif-panel {
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
-    background: #ffffff;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    border-radius: 12px;
-    max-width: 300px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    transform: translateY(20px);
-    opacity: 0;
-    pointer-events: none;
-    visibility: hidden;
-    transition: all 0.3s ease;
-    z-index: 10000;
-    color: #333;
-    font-size: 13px;
-    font-family: sans-serif;
-  }
-  
-  .pswp__exif-panel--open {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-    pointer-events: auto;
-  }
-  
-  .exif-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-  
-  .exif-item {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .exif-item .label {
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: #888;
-    margin-bottom: 2px;
-  }
-  
-  .exif-item .value {
-    font-weight: 600;
-  }
-  
-  .exif-row {
-    display: flex;
-    gap: 12px;
-    margin-top: 8px;
-    padding-top: 8px;
-    border-top: 1px solid #eee;
-    color: #555;
-    font-family: monospace;
-  }
-</style>

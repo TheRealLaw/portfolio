@@ -18,6 +18,10 @@ cd "$PROJECT_DIR" || { echo "Failed to cd to $PROJECT_DIR" >> "$LOG_FILE"; exit 
 
 
 
+# Optimize images before commiting
+echo "--- Optimizing Images ---" >> "$LOG_FILE"
+npm run optimize >> "$LOG_FILE" 2>&1
+
 # Add all new changes (new folders/images from Lightroom)
 git add . >> "$LOG_FILE" 2>&1
 

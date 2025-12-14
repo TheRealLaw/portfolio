@@ -21,4 +21,11 @@ logs/
 .DS_Store
 
 # jetbrains setting folder
+# jetbrains setting folder
 .idea/
+
+
+# backup for original images
+src/content/_ORIGINALS/
+# ignore source files
+*.psd

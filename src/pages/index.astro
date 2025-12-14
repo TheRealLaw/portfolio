@@ -1,76 +1,86 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import GalleryCard from '../components/GalleryCard.astro';
-import fs from 'node:fs';
-import nodePath from 'node:path';
-import ExifReader from 'exifreader';
-import homepageHero from '../content/portfolio/mountain view/homepage .jpg';
+import Layout from "../layouts/Layout.astro";
+import GalleryCard from "../components/GalleryCard.astro";
+import fs from "node:fs";
+import nodePath from "node:path";
+import ExifReader from "exifreader";
+import homepageHero from "../content/portfolio/mountain view/homepage .jpg";
 
 // Get all cover images
-const covers = import.meta.glob('/src/content/portfolio/*/cover.{jpg,png,jpeg,webp}', { eager: true });
-
-
+const covers = import.meta.glob(
+  "/src/content/portfolio/*/cover.{jpg,png,jpeg,webp}",
+  { eager: true },
+);
 
 // Process into a list of collections
-const collections = Object.keys(covers).map((filePath) => {
-  const parts = filePath.split('/');
-  const name = parts[4];
-  const coverModule = covers[filePath] as any;
-  const image = coverModule.default || coverModule;
+const collections = Object.keys(covers)
+  .map((filePath) => {
+    const parts = filePath.split("/");
+    const name = parts[4];
+    const coverModule = covers[filePath] as any;
+    const image = coverModule.default || coverModule;
 
-  // Attempt to determine date
-  let date = new Date(0);
-  try {
-    const absolutePath = nodePath.join(process.cwd(), filePath.startsWith('/') ? filePath.slice(1) : filePath);
-    
-    // Try EXIF first
+    // Attempt to determine date
+    let date = new Date(0);
     try {
+      const absolutePath = nodePath.join(
+        process.cwd(),
+        filePath.startsWith("/") ? filePath.slice(1) : filePath,
+      );
+
+      // Try EXIF first
+      try {
         const buffer = fs.readFileSync(absolutePath);
         const tags = ExifReader.load(buffer);
         if (tags.DateTimeOriginal?.description) {
-            // Format: "YYYY:MM:DD HH:MM:SS"
-            const parts = tags.DateTimeOriginal.description.split(' ');
-            const datePart = parts[0].replace(/:/g, '-');
-            const timePart = parts[1];
-            date = new Date(`${datePart}T${timePart}`);
+          // Format: "YYYY:MM:DD HH:MM:SS"
+          const parts = tags.DateTimeOriginal.description.split(" ");
+          const datePart = parts[0].replace(/:/g, "-");
+          const timePart = parts[1];
+          date = new Date(`${datePart}T${timePart}`);
         } else {
-            // Fallback to mtime
-            const stats = fs.statSync(absolutePath);
-            date = stats.mtime;
+          // Fallback to mtime
+          const stats = fs.statSync(absolutePath);
+          date = stats.mtime;
         }
-    } catch (e) {
+      } catch (e) {
         // If EXIF fails, try mtime (or file create time)
         const stats = fs.statSync(absolutePath);
         date = stats.mtime;
-    }
-  } catch (e) {
+      }
+    } catch (e) {
       console.warn(`Could not determine date for ${name}`, e);
-  }
+    }
 
-  return {
-    name,
-    href: `/portfolio/${encodeURIComponent(name)}`,
-    image,
-    path: filePath,
-    date
-  };
-}).sort((a, b) => b.date.getTime() - a.date.getTime()); // Newest first
+    return {
+      name,
+      href: `/portfolio/${encodeURIComponent(name)}`,
+      image,
+      path: filePath,
+      date,
+    };
+  })
+  .sort((a, b) => b.date.getTime() - a.date.getTime()); // Newest first
 ---
-
-
 
 <Layout title="Portfolio | Leo Wuellner" heroImage={homepageHero}>
   <div class="flex flex-col items-center mb-12">
-    <h1 class="text-xl md:text-2xl font-normal uppercase tracking-[0.3em] text-gray-900">Portfolio</h1>
+    <h1
+      class="text-xl md:text-2xl font-normal uppercase tracking-[0.3em] text-gray-900"
+    >
+      Portfolio
+    </h1>
   </div>
 
   <div class="columns-1 md:columns-2 gap-8 space-y-8">
-    {collections.map((collection) => (
-      <GalleryCard 
-        title={collection.name} 
-        coverImage={collection.image} 
-        href={collection.href} 
-      />
-    ))}
+    {
+      collections.map((collection) => (
+        <GalleryCard
+          title={collection.name}
+          coverImage={collection.image}
+          href={collection.href}
+        />
+      ))
+    }
   </div>
 </Layout>

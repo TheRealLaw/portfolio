@@ -1,19 +1,36 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import Lightbox from '../../components/Lightbox.astro';
-import type { ImageMetadata } from 'astro';
-import fs from 'node:fs';
-import nodePath from 'node:path';
-import ExifReader from 'exifreader';
+import Layout from "../../layouts/Layout.astro";
+import Lightbox from "../../components/Lightbox.astro";
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+import fs from "node:fs";
+import nodePath from "node:path";
+import ExifReader from "exifreader";
 
 export async function getStaticPaths() {
-  const allContent = import.meta.glob('/src/content/portfolio/*/*', { eager: true });
+  const portfolioContent = import.meta.glob(
+    "/src/content/portfolio/**/*.{jpg,png,jpeg,webp,JPG,PNG,JPEG,WEBP}",
+    {
+      eager: true,
+    },
+  );
+  const stylesContent = import.meta.glob(
+    "/src/content/portfolio/styles/**/*.{jpg,png,jpeg,webp,JPG,PNG,JPEG,WEBP}",
+    {
+      eager: true,
+    },
+  );
+  const allContent = { ...portfolioContent, ...stylesContent };
   const collections = new Set<string>();
 
   for (const path in allContent) {
-    const parts = path.split('/');
-    // /src/content/portfolio/[collection]/[file]
-    if (parts[4]) {
+    const parts = path.split("/");
+    // Check for standard portfolio: src/content/portfolio/[name] (parts[4])
+    // Check for styles: src/content/portfolio/styles/[name] (parts[5])
+
+    if (parts[4] === "styles" && parts[5]) {
+      collections.add(parts[5]);
+    } else if (parts[4] && parts[4] !== "styles") {
       collections.add(parts[4]);
     }
   }
@@ -34,12 +51,23 @@ const { slug } = Astro.params;
 // Here we are inside the component. We can reuse the glob from file scope or pass data.
 // Passing data via `props` in `getStaticPaths` is better.
 
-const allImages = import.meta.glob('/src/content/portfolio/**/*.{jpg,png,jpeg,webp}', { eager: true });
-const collectionImages: { src: string | ImageMetadata, title: string, path: string }[] = [];
+const allImages = import.meta.glob(
+  "/src/content/portfolio/**/*.{jpg,png,jpeg,webp,JPG,PNG,JPEG,WEBP}",
+  { eager: true },
+);
+const collectionImages: {
+  src: string | ImageMetadata;
+  title: string;
+  path: string;
+}[] = [];
 
 for (const path in allImages) {
-  if (path.includes(`/src/content/portfolio/${slug}/`)) {
-    const parts = path.split('/');
+  // Check if matches /portfolio/slug/ OR /portfolio/styles/slug/
+  if (
+    path.includes(`/src/content/portfolio/${slug}/`) ||
+    path.includes(`/src/content/portfolio/styles/${slug}/`)
+  ) {
+    const parts = path.split("/");
     const filename = parts[parts.length - 1];
     // Exclude cover if we want, or keep it. PRD says "Masonry or Justified Grid of all images".
     // Usually cover is included.
@@ -47,100 +75,108 @@ for (const path in allImages) {
     collectionImages.push({
       src: mod.default || mod,
       title: filename,
-      path // Add path here
+      path, // Add path here
     });
   }
 }
 
-
-
-
-
 // Helper to get image metadata
-const imagesWithMetadata = await Promise.all(collectionImages.map(async (img) => {
-  const meta = img.src as ImageMetadata;
-  
-  // Resolve absolute path for EXIF reading
-  const absolutePath = nodePath.join(process.cwd(), img.path.startsWith('/') ? img.path.slice(1) : img.path);
-  
-  let exifData = null;
-  try {
-    const fileBuffer = fs.readFileSync(absolutePath);
-    const tags = ExifReader.load(fileBuffer);
+const imagesWithMetadata = await Promise.all(
+  collectionImages.map(async (img) => {
+    const meta = img.src as ImageMetadata;
 
-    // Convert DMS to Decimal
-    const convertToDecimal = (gpsTags: any, refTag: any) => {
-       if (!gpsTags || !refTag) return null;
-       // ExifReader returns value as array of numbers [degrees, minutes, seconds] usually, OR as string description?
-       // tags.GPSLatitude.description is string "34, 4, 0.0" 
-       // tags.GPSLatitude.value is array [34, 4, 0] usually
-       const dms = gpsTags.value;
-       const ref = refTag.value[0]; // Ref is usually array ["N"]
-       
-       if (!dms || dms.length < 3) return null;
+    // Resolve absolute path for EXIF reading
+    const absolutePath = nodePath.join(
+      process.cwd(),
+      img.path.startsWith("/") ? img.path.slice(1) : img.path,
+    );
 
-       let decimal = dms[0] + dms[1] / 60 + dms[2] / 3600;
-       if (ref === 'S' || ref === 'W') {
-         decimal = decimal * -1;
-       }
-       return decimal.toFixed(6); // 6 decimal places is enough precision
+    let exifData = null;
+    try {
+      const fileBuffer = fs.readFileSync(absolutePath);
+      const tags = ExifReader.load(fileBuffer);
+
+      // Convert DMS to Decimal
+      const convertToDecimal = (gpsTags: any, refTag: any) => {
+        if (!gpsTags || !refTag) return null;
+        // ExifReader returns value as array of numbers [degrees, minutes, seconds] usually, OR as string description?
+        // tags.GPSLatitude.description is string "34, 4, 0.0"
+        // tags.GPSLatitude.value is array [34, 4, 0] usually
+        const dms = gpsTags.value;
+        const ref = refTag.value[0]; // Ref is usually array ["N"]
+
+        if (!dms || dms.length < 3) return null;
+
+        let decimal =
+          Number(dms[0]) + Number(dms[1]) / 60 + Number(dms[2]) / 3600;
+        if (ref === "S" || ref === "W") {
+          decimal = decimal * -1;
+        }
+        if (isNaN(decimal)) return null;
+        return decimal.toFixed(6); // 6 decimal places is enough precision
+      };
+
+      // Extract relevant fields safely
+      exifData = {
+        model: tags.Model?.description || "",
+        lens: tags.LensModel?.description || "",
+        focalLength: tags.FocalLength?.description || "",
+        fNumber: tags.FNumber?.description || "",
+        iso: tags.ISOSpeedRatings?.description || "",
+        exposure: tags.ExposureTime?.description || "",
+        date: tags.DateTimeOriginal?.description || "",
+        software: tags.Software?.description || "",
+        gps: {
+          lat: convertToDecimal(tags.GPSLatitude, tags.GPSLatitudeRef),
+          lon: convertToDecimal(tags.GPSLongitude, tags.GPSLongitudeRef),
+        },
+      };
+    } catch (e) {
+      console.warn(`Failed to read EXIF for ${img.path}`, e);
+    }
+
+    return {
+      ...img,
+      width: meta.width,
+      height: meta.height,
+      src: meta.src, // Keep this for Lightbox (needs string URL)
+      image: meta, // Keep original metadata for Astro <Image /> optimization
+      exif: exifData,
     };
-    
-    // Extract relevant fields safely
-    exifData = {
-      model: tags.Model?.description || '',
-      lens: tags.LensModel?.description || '',
-      focalLength: tags.FocalLength?.description || '',
-      fNumber: tags.FNumber?.description || '',
-      iso: tags.ISOSpeedRatings?.description || '',
-      exposure: tags.ExposureTime?.description || '',
-      date: tags.DateTimeOriginal?.description || '',
-      software: tags.Software?.description || '',
-      gps: {
-        lat: convertToDecimal(tags.GPSLatitude, tags.GPSLatitudeRef), 
-        lon: convertToDecimal(tags.GPSLongitude, tags.GPSLongitudeRef)
-      }
-    };
-  } catch (e) {
-    console.warn(`Failed to read EXIF for ${img.path}`, e);
-  }
-
-  return {
-    ...img,
-    width: meta.width,
-    height: meta.height,
-    src: meta.src,
-    exif: exifData
-  };
-}));
+  }),
+);
 ---
 
-<Layout title={`${slug ? slug.charAt(0).toUpperCase() + slug.slice(1) : 'Collection'} | Leo Wuellner`}>
+<Layout
+  title={`${slug ? slug.charAt(0).toUpperCase() + slug.slice(1) : "Collection"} | Leo Wuellner`}
+>
   <div class="mb-8">
     <h1 class="text-3xl font-bold uppercase tracking-widest">{slug}</h1>
   </div>
 
   <div id="gallery" class="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
-    {imagesWithMetadata.map((img) => (
-      <a 
-        href={img.src} 
-        data-pswp-width={img.width} 
-        data-pswp-height={img.height}
-        data-exif={JSON.stringify(img.exif)} 
-        target="_blank"
-        class="block break-inside-avoid mb-6 group cursor-zoom-in"
-      >
-        <div class="overflow-hidden bg-gray-100">
-          <img 
-            src={img.src} 
-            alt={img.title} 
-            class="w-full h-auto transition-transform duration-700 ease-in-out group-hover:scale-105"
-            loading="lazy"
-          />
-        </div>
-      </a>
-    ))}
+    {
+      imagesWithMetadata.map((img) => (
+        <a
+          href={img.src}
+          data-pswp-width={img.width}
+          data-pswp-height={img.height}
+          data-exif={JSON.stringify(img.exif)}
+          class="block break-inside-avoid mb-6 group cursor-zoom-in"
+        >
+          <div class="overflow-hidden bg-gray-100">
+            <Image
+              src={img.image}
+              alt={img.title}
+              width={600}
+              format="webp"
+              class="w-full h-auto transition-transform duration-700 ease-in-out group-hover:scale-105"
+            />
+          </div>
+        </a>
+      ))
+    }
   </div>
-  
+
   <Lightbox />
 </Layout>
