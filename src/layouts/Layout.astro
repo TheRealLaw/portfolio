@@ -19,6 +19,33 @@ const { title, heroImage } = Astro.props;
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://leowuellner.com/" />
+    <meta property="og:title" content={title} />
+    <meta
+      property="og:description"
+      content="Leo Wuellner is a photographer specializing in urban, landscape, and portrait photography."
+    />
+    <meta
+      property="og:image"
+      content="https://leowuellner.com/open-graph.png"
+    />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://leowuellner.com/" />
+    <meta property="twitter:title" content={title} />
+    <meta
+      property="twitter:description"
+      content="Leo Wuellner is a photographer specializing in urban, landscape, and portrait photography."
+    />
+    <meta
+      property="twitter:image"
+      content="https://leowuellner.com/open-graph.png"
+    />
+
     <title>{title}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
