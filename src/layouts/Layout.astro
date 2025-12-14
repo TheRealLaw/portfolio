@@ -78,12 +78,12 @@ const { title, heroImage } = Astro.props;
   <body class="min-h-screen flex flex-col">
     <Header heroImage={heroImage} />
 
-    <main class="flex-grow w-full max-w-7xl mx-auto px-6 md:px-12 pb-20">
+    <main class="flex-grow w-full max-w-7xl mx-auto px-4 md:px-12 pb-20">
       <slot />
     </main>
 
     <footer class="w-full py-8 text-gray-400 text-xs uppercase tracking-widest">
-      <div class="max-w-7xl mx-auto px-6 md:px-12 flex items-center gap-4">
+      <div class="max-w-7xl mx-auto px-4 md:px-12 flex items-center gap-4">
         <div>&copy; {new Date().getFullYear()} Leo Wuellner</div>
         <a
           href="https://instagram.com/leophotojourney"
