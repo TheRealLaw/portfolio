@@ -11,7 +11,17 @@ import "photoswipe/style.css";
     children: "a",
     pswpModule: PhotoSwipe,
     bgOpacity: 1.0,
-    padding: { top: 40, bottom: 40, left: 100, right: 100 },
+    paddingFn: (viewportSize) => {
+      // Responsive padding
+      // viewportSize.x is width, viewportSize.y is height
+      if (viewportSize.x < 700) {
+        // Mobile: small padding to maximize image size
+        return { top: 60, bottom: 60, left: 0, right: 0 };
+      } else {
+        // Desktop: generous padding
+        return { top: 40, bottom: 40, left: 100, right: 100 };
+      }
+    },
     loop: false,
   });
   console.log("PhotoSwipe initialized for #gallery with children 'a'");
