@@ -10,7 +10,7 @@ interface Props {
   objectPosition?: string;
 }
 
-const { title, href, coverImage, aspectRatio = "auto" } = Astro.props;
+const { title, href, coverImage, aspectRatio = "square" } = Astro.props;
 
 // Helper to determine if coverImage is a string path or ImageMetadata
 // Helper to determine if coverImage is a string path or ImageMetadata
@@ -22,9 +22,9 @@ const imgSrc = coverImage
   : ""; // Fallback or empty
 ---
 
-<a href={href} class="group block relative mb-6 break-inside-avoid">
+<a href={href} class="group block relative w-full h-full">
   <div
-    class={`relative overflow-hidden bg-gray-100 ${aspectRatio === "square" ? "aspect-square" : ""}`}
+    class={`relative overflow-hidden bg-gray-100 w-full ${aspectRatio === "square" ? "aspect-square" : ""}`}
   >
     {
       imgSrc && (

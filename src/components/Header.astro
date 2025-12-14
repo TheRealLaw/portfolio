@@ -73,35 +73,40 @@ const { heroImage } = Astro.props;
           <ul class="flex items-center gap-8">
             {navItems.map((item) => (
               <li class="relative group nav-item">
-                <a
-                  href={item.href}
-                  data-has-dropdown={!!item.dropdown}
-                  class:list={[
-                    "text-sm font-medium uppercase tracking-widest transition-colors flex items-center gap-1 cursor-pointer",
-                    currentPath === item.href
-                      ? "border-b border-white pb-1"
-                      : "text-white/90 hover:text-white",
-                    item.dropdown ? "dropdown-trigger" : "",
-                  ]}
-                >
-                  {item.name}
+                <div class="flex items-center gap-1">
+                  <a
+                    href={item.href}
+                    class:list={[
+                      "text-sm font-medium uppercase tracking-widest transition-colors cursor-pointer",
+                      currentPath === item.href
+                        ? "border-b border-white pb-1"
+                        : "text-white/90 hover:text-white",
+                    ]}
+                  >
+                    {item.name}
+                  </a>
                   {item.dropdown && (
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      class="h-3 w-3 opacity-70 transition-transform duration-200 group-[.open]:rotate-180"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
+                    <button
+                      class="dropdown-trigger p-1 focus:outline-none"
+                      aria-label="Toggle Dropdown"
                     >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M19 9l-7 7-7-7"
-                      />
-                    </svg>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-3 w-3 opacity-70 transition-transform duration-200 group-[.open]:rotate-180"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M19 9l-7 7-7-7"
+                        />
+                      </svg>
+                    </button>
                   )}
-                </a>
+                </div>
 
                 {/* Dropdown (Darker for Hero?) or White? keeping white for consistency, handling text color */}
                 {item.dropdown && (
@@ -148,35 +153,40 @@ const { heroImage } = Astro.props;
           <ul class="flex items-center gap-8">
             {navItems.map((item) => (
               <li class="relative group nav-item">
-                <a
-                  href={item.href}
-                  data-has-dropdown={!!item.dropdown}
-                  class:list={[
-                    "text-sm font-medium uppercase tracking-widest transition-colors flex items-center gap-1 cursor-pointer",
-                    currentPath === item.href
-                      ? "text-black border-b border-black pb-1"
-                      : "text-gray-500 hover:text-black",
-                    item.dropdown ? "dropdown-trigger" : "", // Marker class
-                  ]}
-                >
-                  {item.name}
+                <div class="flex items-center gap-1">
+                  <a
+                    href={item.href}
+                    class:list={[
+                      "text-sm font-medium uppercase tracking-widest transition-colors cursor-pointer",
+                      currentPath === item.href
+                        ? "text-black border-b border-black pb-1"
+                        : "text-gray-500 hover:text-black",
+                    ]}
+                  >
+                    {item.name}
+                  </a>
                   {item.dropdown && (
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      class="h-3 w-3 opacity-50 transition-transform duration-200 group-[.open]:rotate-180"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
+                    <button
+                      class="dropdown-trigger p-1 focus:outline-none"
+                      aria-label="Toggle Dropdown"
                     >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M19 9l-7 7-7-7"
-                      />
-                    </svg>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-3 w-3 opacity-50 transition-transform duration-200 group-[.open]:rotate-180"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M19 9l-7 7-7-7"
+                        />
+                      </svg>
+                    </button>
                   )}
-                </a>
+                </div>
 
                 {item.dropdown && (
                   <div class="absolute top-full left-1/2 -translate-x-1/2 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-[.open]:opacity-100 group-[.open]:visible transition-all duration-200 min-w-[200px]">
@@ -213,7 +223,9 @@ const { heroImage } = Astro.props;
 
         // Toggle 'open' class on the parent list item
         const parent = trigger.closest(".nav-item");
-        parent.classList.toggle("open");
+        if (parent) {
+          parent.classList.toggle("open");
+        }
       });
     });
 
