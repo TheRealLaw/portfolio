@@ -22,7 +22,7 @@ const { title, heroImage } = Astro.props;
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://leowuellner.com/" />
+    <meta property="og:url" content={Astro.url} />
     <meta property="og:title" content={title} />
     <meta
       property="og:description"
@@ -30,12 +30,14 @@ const { title, heroImage } = Astro.props;
     />
     <meta
       property="og:image"
-      content="https://leowuellner.com/open-graph.png"
+      content={new URL("/open-graph.png", Astro.site)}
     />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://leowuellner.com/" />
+    <meta property="twitter:url" content={Astro.url} />
     <meta property="twitter:title" content={title} />
     <meta
       property="twitter:description"
@@ -43,7 +45,7 @@ const { title, heroImage } = Astro.props;
     />
     <meta
       property="twitter:image"
-      content="https://leowuellner.com/open-graph.png"
+      content={new URL("/open-graph.png", Astro.site)}
     />
 
     <title>{title}</title>
