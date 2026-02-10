@@ -40,6 +40,33 @@ import "photoswipe/style.css";
     if (!pswp || !pswp.ui) return;
 
     pswp.ui.registerElement({
+      name: "map-btn",
+      order: 8,
+      isButton: true,
+      tagName: "button",
+      html: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>',
+      onClick: (event, el, pswpInstance) => {
+        const currSlide = pswpInstance.currSlide;
+        if (currSlide && currSlide.data.element) {
+          const exifJson = currSlide.data.element.dataset.exif;
+          if (exifJson) {
+            try {
+              const exif = JSON.parse(exifJson);
+              if (exif.gps && exif.gps.lat && exif.gps.lon) {
+                window.open(
+                  `https://www.google.com/maps/search/?api=1&query=${exif.gps.lat},${exif.gps.lon}`,
+                  "_blank",
+                );
+              }
+            } catch (e) {
+              console.error("Error opening map", e);
+            }
+          }
+        }
+      },
+    });
+
+    pswp.ui.registerElement({
       name: "info-btn",
       order: 9,
       isButton: true,
@@ -51,6 +78,26 @@ import "photoswipe/style.css";
           infoPanel.classList.toggle("pswp__exif-panel--open");
         }
       },
+    });
+
+    // Handle visibility of map button based on GPS data
+    pswp.on("change", () => {
+      const currSlide = pswp.currSlide;
+      const mapBtn = document.querySelector(".pswp__button--map-btn");
+
+      if (mapBtn) {
+        let hasGps = false;
+        if (currSlide && currSlide.data.element) {
+          const exifJson = currSlide.data.element.dataset.exif;
+          if (exifJson) {
+            try {
+              const exif = JSON.parse(exifJson);
+              hasGps = !!(exif.gps && exif.gps.lat && exif.gps.lon);
+            } catch (e) {}
+          }
+        }
+        (mapBtn as HTMLElement).style.display = hasGps ? "block" : "none";
+      }
     });
 
     pswp.on("close", () => {
