@@ -131,9 +131,11 @@ const { heroImage } = Astro.props;
 
       {/* Center Branding */}
       <div class="relative z-10 flex-grow flex items-center justify-center">
-        <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold uppercase tracking-[0.25em] text-white text-center drop-shadow-md">
-          Leo Wuellner
-        </h1>
+        <a href="/bio" class="inline-block hover:opacity-80 transition-all duration-300">
+          <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold uppercase tracking-[0.25em] text-white text-center drop-shadow-md">
+            Leo Wuellner
+          </h1>
+        </a>
       </div>
     </header>
   ) : (

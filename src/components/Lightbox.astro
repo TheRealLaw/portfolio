@@ -13,31 +13,121 @@ import "photoswipe/style.css";
     bgOpacity: 1.0,
     paddingFn: (viewportSize) => {
       // Responsive padding
-      // viewportSize.x is width, viewportSize.y is height
-      if (viewportSize.x < 700) {
-        // Mobile: small padding to maximize image size
-        return { top: 60, bottom: 60, left: 0, right: 0 };
+      if (viewportSize.x < 1024) {
+        // Mobile/Tablet: standard padding
+        return { top: 60, bottom: 60, left: 20, right: 20 };
       } else {
-        // Desktop: generous padding
-        return { top: 40, bottom: 40, left: 100, right: 100 };
+        // Desktop: Offset left by adding large right padding for caption
+        const rightPadding = Math.min(450, viewportSize.x * 0.3);
+        return { top: 80, bottom: 80, left: 80, right: rightPadding };
       }
     },
     loop: false,
   });
-  console.log("PhotoSwipe initialized for #gallery with children 'a'");
-
-  if (!document.querySelector("#gallery")) {
-    console.error("Gallery element #gallery not found!");
-  } else {
-    console.log(
-      "Gallery element found, count of links:",
-      document.querySelectorAll("#gallery a").length,
-    );
-  }
 
   lightbox.on("uiRegister", function () {
     const pswp = lightbox.pswp;
     if (!pswp || !pswp.ui) return;
+
+    // Custom Caption on the right with Metadata
+    pswp.ui.registerElement({
+      name: "custom-caption",
+      appendTo: "root",
+      onInit: (el, pswpInstance) => {
+        el.className = "pswp__custom-caption";
+        pswpInstance.on("change", () => {
+          const currSlide = pswpInstance.currSlide;
+          if (currSlide && currSlide.data.element) {
+            const img = currSlide.data.element.querySelector("img");
+            const exifJson = currSlide.data.element.dataset.exif;
+            
+            if (img) {
+              const title = img.getAttribute("alt") || "";
+              const cleanTitle = title.replace(/\.[^/.]+$/, "").replace(/[_-]/g, " ");
+              
+              let metaHtml = "";
+              if (exifJson) {
+                try {
+                  const exif = JSON.parse(exifJson);
+                  
+                  // Format Date
+                  let dateStr = "";
+                  if (exif.date) {
+                    const parts = exif.date.split(" ");
+                    if (parts.length >= 1) {
+                      dateStr = parts[0].replace(/:/g, "/");
+                    }
+                  }
+
+                  const settings = `${exif.iso ? `ISO ${exif.iso}` : ""} ${exif.fNumber ? ` · ${exif.fNumber}` : ""} ${exif.exposure ? ` · ${exif.exposure}` : ""}`.trim();
+
+                  if (dateStr || settings || (exif.gps && exif.gps.lat)) {
+                    metaHtml = `
+                      <div class="caption-metadata">
+                        ${dateStr ? `<div class="meta-item"><span class="label">Date</span><span class="value">${dateStr}</span></div>` : ""}
+                        ${exif.gps && exif.gps.lat ? `<div class="meta-item loc-container"><span class="label">Location</span><span class="value loc-val" data-lat="${exif.gps.lat}" data-lon="${exif.gps.lon}">Loading location...</span></div>` : ""}
+                        ${settings ? `
+                        <div class="meta-item">
+                          <span class="label">Settings</span>
+                          <span class="value">${settings}</span>
+                        </div>` : ""}
+                      </div>
+                    `;
+                  }
+                } catch (e) {
+                  console.error("Error parsing EXIF", e);
+                }
+              }
+
+              el.innerHTML = `
+                <div class="caption-content">
+                  <h2 class="caption-title">${cleanTitle}</h2>
+                  ${metaHtml}
+                </div>
+              `;
+
+              // Trigger Reverse Geocoding
+              const locEl = el.querySelector(".loc-val");
+              if (locEl) {
+                const lat = locEl.getAttribute("data-lat");
+                const lon = locEl.getAttribute("data-lon");
+                if (lat && lon && lat !== "NaN" && lon !== "NaN") {
+                  const cacheKey = `geo:${lat},${lon}`;
+                  const cached = sessionStorage.getItem(cacheKey);
+                  
+                  const handleLocationResult = (name) => {
+                    if (name === "Unknown Location") {
+                      const container = locEl.closest(".loc-container");
+                      if (container) (container as HTMLElement).style.display = "none";
+                    } else {
+                      locEl.textContent = name;
+                    }
+                  };
+
+                  if (cached) {
+                    handleLocationResult(cached);
+                  } else {
+                    fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&zoom=10`)
+                      .then(res => res.json())
+                      .then(data => {
+                        let locationName = "Unknown Location";
+                        if (data.address) {
+                          const city = data.address.city || data.address.town || data.address.village || data.address.county;
+                          const country = data.address.country;
+                          locationName = city && country ? `${city}, ${country}` : (country || data.display_name.split(",")[0]);
+                        }
+                        handleLocationResult(locationName);
+                        sessionStorage.setItem(cacheKey, locationName);
+                      })
+                      .catch(() => { handleLocationResult("Unknown Location"); });
+                  }
+                }
+              }
+            }
+          }
+        });
+      },
+    });
 
     pswp.ui.registerElement({
       name: "map-btn",
@@ -53,29 +143,10 @@ import "photoswipe/style.css";
             try {
               const exif = JSON.parse(exifJson);
               if (exif.gps && exif.gps.lat && exif.gps.lon) {
-                window.open(
-                  `https://www.google.com/maps/search/?api=1&query=${exif.gps.lat},${exif.gps.lon}`,
-                  "_blank",
-                );
+                window.open(`https://www.google.com/maps/search/?api=1&query=${exif.gps.lat},${exif.gps.lon}`, "_blank");
               }
-            } catch (e) {
-              console.error("Error opening map", e);
-            }
+            } catch (e) { console.error("Error opening map", e); }
           }
-        }
-      },
-    });
-
-    pswp.ui.registerElement({
-      name: "info-btn",
-      order: 9,
-      isButton: true,
-      tagName: "button",
-      html: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>',
-      onClick: (event, el, pswpInstance) => {
-        const infoPanel = document.querySelector(".pswp__exif-panel");
-        if (infoPanel) {
-          infoPanel.classList.toggle("pswp__exif-panel--open");
         }
       },
     });
@@ -84,7 +155,6 @@ import "photoswipe/style.css";
     pswp.on("change", () => {
       const currSlide = pswp.currSlide;
       const mapBtn = document.querySelector(".pswp__button--map-btn");
-
       if (mapBtn) {
         let hasGps = false;
         if (currSlide && currSlide.data.element) {
@@ -98,115 +168,6 @@ import "photoswipe/style.css";
         }
         (mapBtn as HTMLElement).style.display = hasGps ? "block" : "none";
       }
-    });
-
-    pswp.on("close", () => {
-      const infoPanel = document.querySelector(".pswp__exif-panel");
-      if (infoPanel) {
-        infoPanel.classList.remove("pswp__exif-panel--open");
-      }
-    });
-
-    pswp.ui.registerElement({
-      name: "exif-panel",
-      appendTo: "root",
-      onInit: (el, pswpInstance) => {
-        el.className = "pswp__exif-panel";
-        pswpInstance.on("change", () => {
-          const currSlide = pswpInstance.currSlide;
-          // data-exif is on the anchor tag, which is currSlide.data.element
-          if (currSlide && currSlide.data.element) {
-            const exifJson = currSlide.data.element.dataset.exif;
-            let content = "<p>No EXIF data available</p>";
-
-            if (exifJson) {
-              try {
-                const exif = JSON.parse(exifJson);
-                // Only show if we have meaningful data
-                if (
-                  exif.model ||
-                  exif.lens ||
-                  exif.date ||
-                  (exif.gps && exif.gps.lat)
-                ) {
-                  // Format Date
-                  let dateStr = "";
-                  if (exif.date) {
-                    const parts = exif.date.split(" ");
-                    if (parts.length >= 2) {
-                      dateStr = `${parts[0].replace(/:/g, "/")} ${parts[1].slice(0, 5)}`;
-                    } else {
-                      dateStr = exif.date;
-                    }
-                  }
-
-                  content = `
-                    <div class="exif-grid">
-                      ${exif.date ? `<div class="exif-item"><span class="label">Time</span><span class="value">${dateStr}</span></div>` : ""}
-                      ${exif.model ? `<div class="exif-item"><span class="label">Camera</span><span class="value">${exif.model}</span></div>` : ""}
-                      ${exif.lens ? `<div class="exif-item"><span class="label">Lens</span><span class="value">${exif.lens}</span></div>` : ""}
-                      <div class="exif-row">
-                        ${exif.iso ? `<span>ISO ${exif.iso}</span>` : ""}
-                        ${exif.fNumber ? `<span>${exif.fNumber}</span>` : ""}
-                        ${exif.exposure ? `<span>${exif.exposure}</span>` : ""}
-                      </div>
-                      ${exif.gps && exif.gps.lat ? `<div class="exif-item" style="margin-top: 8px;"><span class="label">Location</span><span class="value loc-val" data-lat="${exif.gps.lat}" data-lon="${exif.gps.lon}">Loading coordinates...</span></div>` : ""}
-                    </div>
-                  `;
-                }
-              } catch (e) {
-                console.error("Error parsing EXIF", e);
-              }
-            }
-            el.innerHTML = content;
-
-            // Trigger Reverse Geocoding if location element exists
-            const locEl = el.querySelector(".loc-val");
-            if (locEl) {
-              const lat = locEl.getAttribute("data-lat");
-              const lon = locEl.getAttribute("data-lon");
-
-              if (!lat || !lon || lat === "NaN" || lon === "NaN") {
-                locEl.textContent = "Location data unavailable";
-                return;
-              }
-
-              const cacheKey = `geo:${lat},${lon}`;
-              const cached = sessionStorage.getItem(cacheKey);
-
-              if (cached) {
-                locEl.textContent = cached;
-              } else {
-                fetch(
-                  `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&zoom=10`,
-                )
-                  .then((res) => res.json())
-                  .then((data) => {
-                    let locationName = "Unknown Location";
-                    if (data.address) {
-                      // Prefer City, Town, Village, then State, Country
-                      const city =
-                        data.address.city ||
-                        data.address.town ||
-                        data.address.village ||
-                        data.address.county;
-                      const country = data.address.country;
-                      if (city && country) locationName = `${city}, ${country}`;
-                      else if (country) locationName = country;
-                      else locationName = data.display_name.split(",")[0];
-                    }
-                    locEl.textContent = locationName;
-                    sessionStorage.setItem(cacheKey, locationName);
-                  })
-                  .catch((err) => {
-                    locEl.textContent = `${lat}, ${lon}`;
-                    console.error(err);
-                  });
-              }
-            }
-          }
-        });
-      },
     });
   });
 
