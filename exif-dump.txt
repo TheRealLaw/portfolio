@@ -1,0 +1,582 @@
+======== ./Paris/untitled-7.jpg
+======== ./Paris/untitled-46.jpg
+======== ./Paris/untitled-52.jpg
+======== ./Paris/untitled-7 copy.jpg
+======== ./Paris/untitled-53.jpg
+======== ./Paris/untitled-51.jpg
+======== ./Paris/untitled-45.jpg
+======== ./Paris/untitled-50.jpg
+======== ./Paris/untitled-54.jpg
+======== ./Paris/untitled-40.jpg
+======== ./Paris/.DS_Store
+======== ./Paris/untitled-55.jpg
+======== ./Paris/untitled-33.jpg
+======== ./Paris/untitled-37.jpg
+======== ./Paris/Tower Light.jpg
+======== ./Paris/untitled-10 copy 2.jpg
+======== ./Paris/untitled-10 copy 3.jpg
+======== ./Paris/untitled-36.jpg
+======== ./Paris/untitled-35.jpg
+======== ./Paris/untitled-38.jpg
+======== ./Paris/untitled-10.jpg
+======== ./Paris/untitled-11.jpg
+======== ./Paris/untitled-39.jpg
+======== ./Paris/untitled-7 copy 2.jpg
+======== ./Paris/untitled-12.jpg
+======== ./Paris/cover.jpg
+======== ./Paris/untitled-8 copy.jpg
+======== ./Paris/untitled-9 copy.jpg
+======== ./Paris/untitled-8.jpg
+======== ./Paris/untitled-49.jpg
+======== ./Paris/Le Metro.jpg
+======== ./Paris/untitled-48.jpg
+======== ./Paris/untitled-9.jpg
+======== ./Bishop/untitled-7.jpg
+======== ./Bishop/untitled-6.jpg
+======== ./Bishop/_D3A9454.jpg
+======== ./Bishop/untitled-4.jpg
+======== ./Bishop/untitled-5.jpg
+======== ./Bishop/.DS_Store
+======== ./Bishop/_D3A9478.jpg
+======== ./Bishop/untitled-2.jpg
+======== ./Bishop/_D3A8765.jpeg
+======== ./Bishop/untitled-3.jpg
+======== ./Bishop/_D3A9178.jpg
+======== ./Bishop/Bristlecone Pine Sunset .jpeg
+======== ./Bishop/_D3A0303-2.jpg
+======== ./Bishop/_D3A9122-HDR.jpeg
+======== ./Bishop/_D3A9194.jpg
+======== ./Bishop/_D3A9369.jpg
+======== ./Bishop/_D3A9427.jpg
+======== ./Bishop/_D3A8864.jpg
+======== ./Bishop/Leou mountain sunrise.jpg
+======== ./Bishop/cover.jpeg
+======== ./Bishop/untitled-4 copy.jpg
+======== ./Bishop/_D3A9377.jpg
+======== ./Bishop/untitled.jpg
+======== ./Bishop/_D3A9577-HDR.jpg
+======== ./Bishop/_D3A8838.jpg
+======== ./Bishop/untitled-8.jpg
+======== ./Bishop/_D3A9317.jpg
+======== ./Bishop/_D3A9108-HDR.jpeg
+======== ./.DS_Store
+======== ./Carmel By-The-Sea/Leo carmel and beach-10.jpg
+======== ./Carmel By-The-Sea/Leo carmel and beach-12.jpg
+======== ./Carmel By-The-Sea/Leo carmel and beach-9.jpg
+======== ./Carmel By-The-Sea/cover copy.jpg
+======== ./Carmel By-The-Sea/Leo carmel and beach-17.jpg
+======== ./Carmel By-The-Sea/cover.jpg
+======== ./Carmel By-The-Sea/Leo carmel and beach-2.jpg
+======== ./Carmel By-The-Sea/Leo carmel and beach-18.jpg
+======== ./Carmel By-The-Sea/Leo carmel and beach-3.jpg
+======== ./Carmel By-The-Sea/Leo carmel and beach-4.jpg
+======== ./Tokyo/untitled-7.jpg
+======== ./Tokyo/Leojapan-13.jpg
+======== ./Tokyo/untitled-6.jpg
+======== ./Tokyo/untitled-4.jpg
+======== ./Tokyo/Leojapan-15 10.27.16 AM.jpg
+======== ./Tokyo/IMG_4083.jpeg
+GPS Latitude                    : 35 deg 40' 54.14" N
+GPS Longitude                   : 139 deg 45' 23.59" E
+======== ./Tokyo/Leojapan-10.jpg
+======== ./Tokyo/Leo japan-1.jpg
+======== ./Tokyo/untitled-5.jpg
+======== ./Tokyo/cover copy.jpg
+======== ./Tokyo/.DS_Store
+======== ./Tokyo/untitled-4-2.jpg
+======== ./Tokyo/leo neu shrine 1.jpeg
+======== ./Tokyo/Leojapan-16.jpg
+======== ./Tokyo/Leojapan-2 10.27.16 AM.jpg
+======== ./Tokyo/UD3A1003-Edit.jpg
+======== ./Tokyo/Leojapan-9.jpg
+======== ./Tokyo/untitled copy.jpg
+======== ./Tokyo/Leojapan-5.jpg
+======== ./Tokyo/untitled copy 3.jpg
+======== ./Tokyo/Leojapan-7.jpg
+======== ./Tokyo/Leojapan.jpg
+======== ./Tokyo/untitled copy 2.jpg
+======== ./Tokyo/cover.jpg
+======== ./Tokyo/untitled-5 copy.jpg
+======== ./Tokyo/untitled.jpg
+======== ./Tokyo/untitled-5 copy 2.jpg
+======== ./mountain view/_D3A6176.jpg
+======== ./mountain view/_D3A6188.jpg
+======== ./mountain view/Shorline Sunset clouds.jpg
+======== ./mountain view/Leo point lobos  -1-2.jpg
+======== ./mountain view/_D3A6160.jpg
+======== ./mountain view/Leostevens creek trail-3.jpg
+======== ./mountain view/cover copy.jpg
+======== ./mountain view/.DS_Store
+======== ./mountain view/_D3A6158.jpg
+======== ./mountain view/Leo Back yard and fron -7.jpg
+======== ./mountain view/Leostevens creek trail-4.jpg
+======== ./mountain view/_D3A6172.jpg
+======== ./mountain view/untitled-3.jpg
+======== ./mountain view/_D3A6114.jpg
+======== ./mountain view/High res image_.jpg
+======== ./mountain view/_D3A6112.jpg
+======== ./mountain view/_D3A6111.jpg
+======== ./mountain view/_D3A4909.jpg
+======== ./mountain view/Leo Back yard and front 2-8-3.jpg
+======== ./mountain view/_D3A6134.jpg
+======== ./mountain view/Leostevens creek trail-1-3.jpg
+======== ./mountain view/leo google photos -2.jpg
+======== ./mountain view/_D3A6123.jpg
+======== ./mountain view/_D3A6136.jpg
+======== ./mountain view/leo google photos -3.jpg
+======== ./mountain view/Leo point lobos  -3.jpg
+======== ./mountain view/Leo Back yard and front 2-11-3.jpg
+======== ./mountain view/cover.jpg
+======== ./mountain view/Leo point lobos  -4.jpg
+======== ./mountain view/Leo point lobos  -5.jpg
+======== ./mountain view/_D3A5983.jpg
+======== ./mountain view/_D3A4858-HDR.jpg
+======== ./mountain view/_D3A6143.jpg
+======== ./mountain view/Leo Back yard and fron -8.jpg
+======== ./mountain view/Leostevens creek trail-2-2.jpg
+======== ./mountain view/Leo Back yard and front 2-1-3.jpg
+======== ./mountain view/Leo Back yard and front 2-12-2.jpg
+======== ./mountain view/homepage .jpg
+======== ./bio.jpeg
+GPS Latitude                    : 37 deg 49' 16.41" N
+GPS Longitude                   : 120 deg 17' 2.70" W
+======== ./styles/black and white/untitled-7.jpg
+======== ./styles/black and white/Leo carmel and beach-10.jpg
+======== ./styles/black and white/IMG_2788.jpeg
+GPS Latitude                    : 41 deg 53' 28.66" N
+GPS Longitude                   : 12 deg 29' 29.47" E
+======== ./styles/black and white/Leo carmel and beach-8.jpg
+======== ./styles/black and white/Leo carmel and beach-12.jpg
+======== ./styles/black and white/untitled 2.jpg
+======== ./styles/black and white/Leo carmel and beach-9.jpg
+======== ./styles/black and white/cover copy.jpg
+======== ./styles/black and white/.DS_Store
+======== ./styles/black and white/IMG_2623.jpeg
+GPS Latitude                    : 41 deg 53' 56.66" N
+GPS Longitude                   : 12 deg 28' 36.62" E
+======== ./styles/black and white/untitled-30.jpg
+======== ./styles/black and white/untitled-32.jpg
+======== ./styles/black and white/untitled-27.jpg
+======== ./styles/black and white/untitled-22.jpg
+======== ./styles/black and white/nolongerover.jpg
+======== ./styles/black and white/untitled-11.jpg
+======== ./styles/black and white/untitled-13.jpg
+======== ./styles/black and white/DSCF7645.jpeg
+======== ./styles/black and white/untitled-12.jpg
+======== ./styles/black and white/cover.jpg
+======== ./styles/black and white/Leo carmel and beach-2.jpg
+======== ./styles/black and white/untitled-8.jpg
+======== ./styles/black and white/Leo carmel and beach-4.jpg
+======== ./styles/black and white/IMG_2396.jpeg
+GPS Latitude                    : 41 deg 53' 26.17" N
+GPS Longitude                   : 12 deg 29' 28.43" E
+======== ./styles/black and white/untitled-9.jpg
+======== ./styles/black and white/untitled-12 2.jpg
+======== ./styles/urban/cover copy.jpg
+======== ./styles/urban/IMG_1721.jpeg
+GPS Latitude                    : 40 deg 42' 10.56" N
+GPS Longitude                   : 73 deg 59' 22.60" W
+======== ./styles/urban/leo google photos -1.jpg
+======== ./styles/urban/leo google photos -2.jpg
+======== ./styles/urban/Leo Back yard and front 2-6-3.jpg
+======== ./styles/urban/Leojapan-2.jpg
+======== ./styles/urban/IMG_1877.jpeg
+GPS Latitude                    : 40 deg 42' 48.16" N
+GPS Longitude                   : 74 deg 0' 46.70" W
+======== ./styles/urban/cover.jpg
+======== ./styles/urban/Leo point lobos  -5.jpg
+======== ./styles/urban/Leo Back yard and front 2-1-4.jpg
+======== ./styles/urban/IMG_0148.jpeg
+GPS Latitude                    : 37 deg 46' 48.50" N
+GPS Longitude                   : 122 deg 23' 23.70" W
+======== ./styles/urban/IMG_1634_jpg.jpg
+======== ./styles/urban/Leo Back yard and front 2-5-2.jpg
+======== ./styles/urban/Leo Back yard and front 2-3-3.jpg
+======== ./styles/.DS_Store
+======== ./styles/HDR/cover copy.jpg
+======== ./styles/HDR/_D3A9122-HDR.jpeg
+======== ./styles/HDR/cover.jpg
+======== ./styles/HDR/_D3A4858-HDR.jpg
+======== ./styles/HDR/not.jpg
+======== ./styles/Street photography/untitled-52.jpg
+======== ./styles/Street photography/untitled-4 2.jpg
+======== ./styles/Street photography/_D3A5442.jpg
+======== ./styles/Street photography/untitled-4 3.jpg
+======== ./styles/Street photography/untitled 2.jpg
+======== ./styles/Street photography/cover copy.jpg
+======== ./styles/Street photography/untitled-2 2.jpg
+======== ./styles/Street photography/.DS_Store
+======== ./styles/Street photography/Leojapan-15.jpg
+======== ./styles/Street photography/untitled-55.jpg
+======== ./styles/Street photography/untitled-2.jpg
+======== ./styles/Street photography/Leojapan-16.jpg
+======== ./styles/Street photography/untitled-18.jpg
+======== ./styles/Street photography/_D3A5393.jpg
+======== ./styles/Street photography/untitled-22.jpg
+======== ./styles/Street photography/_D3A9194.jpg
+======== ./styles/Street photography/IMG_4143.jpeg
+GPS Latitude                    : 35 deg 40' 44.69" N
+GPS Longitude                   : 139 deg 42' 7.99" E
+======== ./styles/Street photography/_D3A6448.jpg
+======== ./styles/Street photography/untitled-12 copy.jpg
+======== ./styles/Street photography/_D3A5419.jpg
+======== ./styles/Street photography/untitled-13 copy.jpg
+======== ./styles/Street photography/untitled-35.jpg
+======== ./styles/Street photography/untitled-10.jpg
+======== ./styles/Street photography/_D3A6860.jpg
+======== ./styles/Street photography/untitled-11.jpg
+======== ./styles/Street photography/untitled-13.jpg
+======== ./styles/Street photography/_D3A6447.jpg
+======== ./styles/Street photography/untitled-12.jpg
+======== ./styles/Street photography/untitled-16.jpg
+======== ./styles/Street photography/_D3A6244.jpg
+======== ./styles/Street photography/IMG_4663.jpeg
+GPS Latitude                    : 35 deg 1' 1.29" N
+GPS Longitude                   : 135 deg 46' 15.62" E
+======== ./styles/Street photography/untitled-17.jpg
+======== ./styles/Street photography/cover.jpg
+======== ./styles/Street photography/_D3A6252.jpg
+======== ./styles/Street photography/untitled-8.jpg
+======== ./styles/Street photography/untitled-9.jpg
+======== ./styles/Street photography/_D3A5429-2.jpg
+======== ./styles/Street photography/_D3A6594.jpg
+======== ./styles/symmetry/IMG_4758.jpeg
+GPS Latitude                    : 34 deg 59' 42.40" N
+GPS Longitude                   : 135 deg 47' 1.27" E
+======== ./styles/symmetry/Leo Back yard and fron -1.jpg
+======== ./styles/symmetry/_D3A5291.jpg
+======== ./styles/symmetry/cover copy.jpg
+======== ./styles/symmetry/Leo Back yard and fron -2.jpg
+======== ./styles/symmetry/.DS_Store
+======== ./styles/symmetry/Leo Back yard and fron -5.jpg
+======== ./styles/symmetry/untitled-33.jpg
+======== ./styles/symmetry/DSCF8033.jpg
+======== ./styles/symmetry/_D3A8304-2.jpg
+======== ./styles/symmetry/leo google photos -2.jpg
+======== ./styles/symmetry/Leo japan all day walking tour -1-2.jpg
+======== ./styles/symmetry/Leo Back yard and front 2-2-2.jpg
+======== ./styles/symmetry/DSCF8038.jpg
+======== ./styles/symmetry/cover.jpg
+======== ./styles/symmetry/Leo carmel and beach-5.jpg
+======== ./styles/symmetry/_D3A5466.jpg
+======== ./styles/symmetry/_D3A9009.jpeg
+======== ./styles/light painting/cover copy.jpg
+======== ./styles/light painting/photo 1 light painting-074.JPG
+======== ./styles/light painting/photo 1 light painting-070.JPG
+======== ./styles/light painting/photo 1 light painting-068.JPG
+======== ./styles/light painting/photo 1 light painting-056.JPG
+======== ./styles/light painting/cover.jpg
+======== ./styles/Negative Space/Shorline Sunset clouds.jpg
+======== ./styles/Negative Space/IMG_2383.jpeg
+GPS Latitude                    : 41 deg 53' 39.41" N
+GPS Longitude                   : 12 deg 28' 38.65" E
+======== ./styles/Negative Space/_D3A9478.jpg
+======== ./styles/Negative Space/_D3A8871.jpg
+======== ./styles/Negative Space/Leo Back yard and front 2-6-2.jpg
+======== ./styles/Negative Space/cover.jpeg
+GPS Latitude                    : 34 deg 59' 41.42" N
+GPS Longitude                   : 135 deg 47' 4.87" E
+======== ./styles/Negative Space/cover copy.jpeg
+GPS Latitude                    : 34 deg 59' 41.42" N
+GPS Longitude                   : 135 deg 47' 4.87" E
+======== ./styles/Negative Space/Leo Back yard and front 2-3-2.jpg
+======== ./styles/animals/Leo carmel and beach-10.jpg
+======== ./styles/animals/Leo japan-2.jpg
+======== ./styles/animals/Leo carmel and beach-12.jpg
+======== ./styles/animals/cover copy.jpg
+======== ./styles/animals/Leo Nala -2.jpg
+======== ./styles/animals/Leo Nala -1.jpg
+======== ./styles/animals/Leo japan all day walking tour -1-7.jpg
+======== ./styles/animals/cover.jpg
+======== ./styles/long exposure/Leo Golden Gate Bridge Night -1 (1).jpg
+======== ./styles/long exposure/Leojapan-10.jpg
+======== ./styles/long exposure/Leo japan-1.jpg
+======== ./styles/long exposure/cover copy.jpg
+======== ./styles/long exposure/Leo Golden Gate Bridge Night -3.jpg
+======== ./styles/long exposure/Leo Golden Gate Bridge Night -1.jpg
+======== ./styles/long exposure/Leo Golden Gate Bridge Night -5.jpg
+======== ./styles/long exposure/night photo with lucasz.jpeg
+======== ./styles/long exposure/Leojapan-9.jpg
+======== ./styles/long exposure/Leo Golden Gate Bridge Night -7.jpg
+======== ./styles/long exposure/_D3A8333.jpg
+======== ./styles/long exposure/leo google photos -1.jpg
+======== ./styles/long exposure/Leojapan-7.jpg
+======== ./styles/long exposure/_D3A8326.jpeg
+======== ./styles/long exposure/cover.jpg
+======== ./new york/IMG_1849.jpeg
+GPS Latitude                    : 40 deg 42' 37.78" N
+GPS Longitude                   : 74 deg 0' 34.92" W
+======== ./new york/IMG_1721.jpeg
+GPS Latitude                    : 40 deg 42' 10.56" N
+GPS Longitude                   : 73 deg 59' 22.60" W
+======== ./new york/IMG_1546.jpeg
+GPS Latitude                    : 40 deg 45' 13.87" N
+GPS Longitude                   : 74 deg 0' 2.47" W
+======== ./new york/IMG_1508.jpeg
+GPS Latitude                    : 40 deg 43' 57.50" N
+GPS Longitude                   : 73 deg 59' 23.91" W
+======== ./new york/cover.jpeg
+GPS Latitude                    : 40 deg 42' 48.16" N
+GPS Longitude                   : 74 deg 0' 46.70" W
+======== ./new york/IMG_1634_jpg.jpg
+======== ./new york/IMG_1578.jpeg
+GPS Latitude                    : 40 deg 45' 11.38" N
+GPS Longitude                   : 73 deg 59' 51.49" W
+======== ./new york/IMG_1885.jpeg
+GPS Latitude                    : 40 deg 42' 46.37" N
+GPS Longitude                   : 74 deg 0' 47.01" W
+======== ./new york/cover copy.jpeg
+GPS Latitude                    : 40 deg 42' 48.16" N
+GPS Longitude                   : 74 deg 0' 46.70" W
+======== ./Kyoto/untitled-7.jpg
+======== ./Kyoto/Leo japan-3.jpg
+======== ./Kyoto/Leo japan-2.jpg
+======== ./Kyoto/untitled-6.jpg
+======== ./Kyoto/untitled-4.jpg
+======== ./Kyoto/IMG_4778.jpeg
+GPS Latitude                    : 34 deg 59' 41.42" N
+GPS Longitude                   : 135 deg 47' 4.87" E
+======== ./Kyoto/.DS_Store
+======== ./Kyoto/IMG_4748.jpeg
+GPS Latitude                    : 34 deg 59' 43.12" N
+GPS Longitude                   : 135 deg 47' 0.11" E
+======== ./Kyoto/IMG_4699.jpeg
+GPS Latitude                    : 35 deg 2' 22.94" N
+GPS Longitude                   : 135 deg 43' 41.74" E
+======== ./Kyoto/IMG_4637.jpeg
+GPS Latitude                    : 35 deg 0' 30.78" N
+GPS Longitude                   : 135 deg 44' 58.61" E
+======== ./Kyoto/UD3A2082-2.jpg
+======== ./Kyoto/untitled-12 copy.jpg
+======== ./Kyoto/IMG_4681.jpeg
+GPS Latitude                    : 35 deg 0' 8.60" N
+GPS Longitude                   : 135 deg 46' 29.27" E
+======== ./Kyoto/untitled-10.jpg
+======== ./Kyoto/untitled-11.jpg
+======== ./Kyoto/untitled-13.jpg
+======== ./Kyoto/Leo japan all day walking tour -1-2.jpg
+======== ./Kyoto/untitled-12.jpg
+======== ./Kyoto/cover.jpeg
+GPS Latitude                    : 34 deg 59' 42.40" N
+GPS Longitude                   : 135 deg 47' 1.27" E
+======== ./Kyoto/Leo japan all day walking tour -1-7.jpg
+======== ./Kyoto/IMG_4663.jpeg
+GPS Latitude                    : 35 deg 1' 1.29" N
+GPS Longitude                   : 135 deg 46' 15.62" E
+======== ./Kyoto/untitled-15.jpg
+======== ./Kyoto/untitled-14.jpg
+======== ./Kyoto/untitled.jpg
+======== ./Kyoto/untitled-11 copy.jpg
+======== ./Kyoto/untitled-10 copy.jpg
+======== ./Kyoto/untitled-8 copy.jpg
+======== ./Kyoto/untitled-9 copy.jpg
+======== ./Kyoto/UD3A1945.jpg
+======== ./Kyoto/untitled-8.jpg
+======== ./Kyoto/IMG_4604.jpeg
+GPS Latitude                    : 35 deg 9' 8.81" N
+GPS Longitude                   : 138 deg 43' 15.68" E
+======== ./Kyoto/cover copy.jpeg
+GPS Latitude                    : 34 deg 59' 42.40" N
+GPS Longitude                   : 135 deg 47' 1.27" E
+======== ./Kyoto/untitled-9.jpg
+======== ./Kyoto/IMG_4777.jpeg
+GPS Latitude                    : 34 deg 59' 41.53" N
+GPS Longitude                   : 135 deg 47' 4.74" E
+======== ./London/untitled-7.jpg
+======== ./London/untitled-6 copy.jpg
+======== ./London/untitled-7 copy.jpg
+======== ./London/untitled-6.jpg
+======== ./London/untitled-4.jpg
+======== ./London/untitled-14 copy.jpg
+======== ./London/untitled-44.jpg
+======== ./London/cover copy.jpg
+======== ./London/untitled-2 2.jpg
+======== ./London/.DS_Store
+======== ./London/Cool train_.png
+======== ./London/untitled-43.jpg
+======== ./London/untitled-2.jpg
+======== ./London/untitled-42.jpg
+======== ./London/untitled-19.jpg
+======== ./London/untitled-30.jpg
+======== ./London/untitled-24.jpg
+======== ./London/untitled-18.jpg
+======== ./London/untitled-26.jpg
+======== ./London/untitled-27.jpg
+======== ./London/untitled-18 copy.jpg
+======== ./London/untitled-23.jpg
+======== ./London/untitled-22.jpg
+======== ./London/untitled-20.jpg
+======== ./London/untitled-12 copy.jpg
+======== ./London/untitled-13 copy.jpg
+======== ./London/untitled-11.jpg
+======== ./London/untitled-7 copy 2.jpg
+======== ./London/untitled-13.jpg
+======== ./London/untitled-12.jpg
+======== ./London/untitled-7 copy 3.jpg
+======== ./London/untitled-16.jpg
+======== ./London/untitled-17 copy.jpg
+======== ./London/untitled-17.jpg
+======== ./London/cover.jpg
+======== ./London/untitled-4 copy.jpg
+======== ./London/untitled-15.jpg
+======== ./London/untitled-29.jpg
+======== ./London/untitled-28.jpg
+======== ./London/untitled-14.jpg
+======== ./London/untitled.jpg
+======== ./London/untitled-8 copy.jpg
+======== ./London/untitled-9 copy.jpg
+======== ./London/untitled-8.jpg
+======== ./London/untitled-9.jpg
+======== ./san francisco/_D3A5292.jpg
+======== ./san francisco/_D3A6566.jpg
+======== ./san francisco/_D3A6412.jpg
+======== ./san francisco/_D3A5442.jpg
+======== ./san francisco/_D3A5291.jpg
+======== ./san francisco/_D3A6559.jpg
+======== ./san francisco/_D3A7069.jpg
+======== ./san francisco/cover copy.jpg
+======== ./san francisco/_D3A5509.jpg
+======== ./san francisco/.DS_Store
+======== ./san francisco/_D3A5323.jpg
+======== ./san francisco/_D3A7090.jpg
+======== ./san francisco/_D3A5309.jpg
+======== ./san francisco/_D3A6961-2.jpg
+======== ./san francisco/_D3A6947.jpg
+======== ./san francisco/untitled-19.jpg
+======== ./san francisco/untitled-25.jpg
+======== ./san francisco/Leo Golden Gate Bridge Night -3.jpg
+======== ./san francisco/_D3A6303.jpg
+======== ./san francisco/untitled-24.jpg
+======== ./san francisco/untitled-18.jpg
+======== ./san francisco/untitled-26.jpg
+======== ./san francisco/_D3A5393.jpg
+======== ./san francisco/untitled-27.jpg
+======== ./san francisco/Leo Golden Gate Bridge Night -1.jpg
+======== ./san francisco/_D3A5546.jpg
+======== ./san francisco/Leo Golden Gate Bridge Night -5.jpg
+======== ./san francisco/untitled-23.jpg
+======== ./san francisco/_D3A6265.jpg
+======== ./san francisco/_D3A7027.jpg
+======== ./san francisco/_D3A5583-5.jpg
+======== ./san francisco/_D3A6476.jpg
+======== ./san francisco/untitled-22.jpg
+======== ./san francisco/untitled-20.jpg
+======== ./san francisco/_D3A6514.jpg
+======== ./san francisco/_D3A5419.jpg
+======== ./san francisco/_D3A6501.jpg
+======== ./san francisco/_D3A6298.jpg
+======== ./san francisco/Leo Golden Gate Bridge Night -7.jpg
+======== ./san francisco/untitled-21.jpg
+======== ./san francisco/_D3A5282-2.jpg
+======== ./san francisco/_D3A6241.jpg
+======== ./san francisco/_D3A7003.jpg
+======== ./san francisco/_D3A6447.jpg
+======== ./san francisco/_D3A5615.jpg
+======== ./san francisco/_D3A6240.jpg
+======== ./san francisco/untitled-16.jpg
+======== ./san francisco/_D3A6244.jpg
+======== ./san francisco/untitled-17.jpg
+======== ./san francisco/IMG_6936.jpeg
+GPS Latitude                    : 37 deg 45' 17.00" N
+GPS Longitude                   : 122 deg 26' 46.86" W
+======== ./san francisco/cover.jpg
+======== ./san francisco/_D3A6496.jpg
+======== ./san francisco/_D3A7038.jpg
+======== ./san francisco/_D3A6252.jpg
+======== ./san francisco/untitled-28.jpg
+======== ./san francisco/_D3A6552.jpg
+======== ./san francisco/_D3A6961.jpg
+======== ./san francisco/_D3A6357.jpg
+======== ./san francisco/_D3A6958.jpg
+======== ./san francisco/_D3A5276.jpg
+======== ./san francisco/Leo Golden Gate Bridge Night -1 2.jpg
+======== ./san francisco/_D3A5316.jpg
+======== ./san francisco/_D3A6420.jpg
+======== ./san francisco/_D3A6608.jpg
+======== ./san francisco/_D3A5466.jpg
+======== ./san francisco/_D3A7067.jpg
+======== ./san francisco/_D3A5429-2.jpg
+======== ./san francisco/_D3A6594.jpg
+======== ./Yosemite/_DSF2078.jpeg
+======== ./Yosemite/_D3A8212.jpg
+======== ./Yosemite/cover copy.jpg
+======== ./Yosemite/.DS_Store
+======== ./Yosemite/_D3A8176.jpg
+======== ./Yosemite/DSCF7702.jpeg
+======== ./Yosemite/_D3A8372-2.jpg
+======== ./Yosemite/DSCF7645.jpeg
+======== ./Yosemite/_D3A8326.jpeg
+======== ./Yosemite/DSCF7594.jpeg
+======== ./Yosemite/cover.jpg
+======== ./Yosemite/_D3A8587.jpg
+======== ./Yosemite/_D3A8633.jpg
+======== ./Yosemite/DSCF7639.jpeg
+======== ./rome/.DS_Store
+======== ./rome/IMG_2797_jpg.jpg
+======== ./rome/Seagull Sunset .jpeg
+GPS Latitude                    : 41 deg 53' 36.16" N
+GPS Longitude                   : 12 deg 29' 0.55" E
+======== ./rome/Contrast .jpeg
+GPS Latitude                    : 41 deg 53' 56.65" N
+GPS Longitude                   : 12 deg 28' 36.62" E
+======== ./rome/Repition.jpeg
+GPS Latitude                    : 41 deg 52' 47.57" N
+GPS Longitude                   : 12 deg 29' 34.77" E
+======== ./rome/End Of The Line .jpeg
+GPS Latitude                    : 41 deg 53' 28.66" N
+GPS Longitude                   : 12 deg 29' 29.47" E
+======== ./rome/Sun Dial.jpeg
+GPS Latitude                    : 41 deg 53' 56.63" N
+GPS Longitude                   : 12 deg 28' 36.62" E
+======== ./rome/Lookout point .jpeg
+GPS Latitude                    : 41 deg 53' 23.89" N
+GPS Longitude                   : 12 deg 29' 36.14" E
+======== ./rome/cover.jpeg
+GPS Latitude                    : 41 deg 53' 26.17" N
+GPS Longitude                   : 12 deg 29' 28.43" E
+======== ./rome/cover copy.jpeg
+GPS Latitude                    : 41 deg 53' 26.17" N
+GPS Longitude                   : 12 deg 29' 28.43" E
+======== ./rome/Sight Lines .jpeg
+GPS Latitude                    : 41 deg 53' 26.85" N
+GPS Longitude                   : 12 deg 29' 27.88" E
+======== ./Oregon/DSCF7986.jpg
+======== ./Oregon/cover copy.jpg
+======== ./Oregon/.DS_Store
+======== ./Oregon/DSCF8085.jpg
+======== ./Oregon/DSCF8033.jpg
+======== ./Oregon/DSCF8006.jpg
+======== ./Oregon/DSCF8038.jpg
+======== ./Oregon/cover.jpg
+======== ./Oregon/DSCF7971.jpg
+======== ./Oregon/DSCF7961.jpg
+======== ./Israel/untitled-7.jpg
+======== ./Israel/untitled-6.jpg
+======== ./Israel/untitled-4.jpg
+======== ./Israel/untitled-5.jpg
+======== ./Israel/.DS_Store
+======== ./Israel/untitled-3.jpg
+======== ./Israel/Leo Israel-7.jpg
+======== ./Israel/Leo Israel-5.jpg
+======== ./Israel/Leo Israel-4.jpg
+======== ./Israel/cover.jpg
+======== ./Israel/untitled.jpg
+======== ./Israel/untitled-3 copy.jpg
+======== ./Israel/Honeymoon-3.jpg
+======== ./Israel/Leo Israel-12.jpg
+======== ./Israel/Honeymoon-2.jpg
+======== ./Israel/Honeymoon-4.jpg
+======== ./Israel/ijoiuj.jpg
+======== ./Half Moon Bay/cover copy.jpg
+======== ./Half Moon Bay/.DS_Store
+======== ./Half Moon Bay/_D3A6921.jpg
+======== ./Half Moon Bay/Lone Soldier.jpg
+======== ./Half Moon Bay/_D3A6756-2.jpg
+======== ./Half Moon Bay/_D3A6915.jpg
+======== ./Half Moon Bay/_D3A6860.jpg
+======== ./Half Moon Bay/_D3A6692.jpg
+======== ./Half Moon Bay/cover.jpg
+======== ./Half Moon Bay/_D3A6657.jpg
+======== ./Half Moon Bay/_D3A6791.jpg
+======== ./Half Moon Bay/_D3A6839.jpg
+  497 image files read

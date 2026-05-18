@@ -47,6 +47,16 @@ body .pswp__button--arrow--next .pswp__icn {
     filter: brightness(0) !important;
 }
 
+/* Hide arrows when disabled (at start or end of gallery) */
+body .pswp__button--arrow--prev:disabled,
+body .pswp__button--arrow--next:disabled,
+body .pswp__button--arrow--prev[disabled],
+body .pswp__button--arrow--next[disabled] {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+}
+
 /* Custom Lightbox Caption (Right Side) */
 .pswp__custom-caption {
     position: absolute;
