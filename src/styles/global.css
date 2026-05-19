@@ -6,9 +6,14 @@ body .pswp__bg {
     background: #ffffff !important;
 }
 
-/* Invert icons to make them visible on white (Close, Zoom, Info get this) */
-body .pswp__icn {
-    filter: invert(1) !important;
+/* Set all buttons and their SVG children to black for clean styling */
+body .pswp__button {
+    color: #000000 !important;
+}
+
+body .pswp__button svg {
+    color: #000000 !important;
+    stroke: currentColor !important;
 }
 
 /* Make UI elements visible on top of everything */
@@ -39,12 +44,6 @@ body .pswp__button--arrow--prev {
 
 body .pswp__button--arrow--next {
     right: 10px !important;
-}
-
-/* Keep icons black */
-body .pswp__button--arrow--prev .pswp__icn,
-body .pswp__button--arrow--next .pswp__icn {
-    filter: brightness(0) !important;
 }
 
 /* Hide arrows when disabled (at start or end of gallery) */
