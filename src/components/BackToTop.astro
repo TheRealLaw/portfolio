@@ -23,6 +23,7 @@
 </button>
 
 <script>
+  document.addEventListener('astro:page-load', () => {
     const backToTopBtn = document.getElementById("back-to-top");
 
     if (backToTopBtn) {
@@ -61,4 +62,5 @@
             });
         });
     }
+  });
 </script>

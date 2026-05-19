@@ -2,13 +2,17 @@
 import "../styles/global.css";
 import Header from "../components/Header.astro";
 import BackToTop from "../components/BackToTop.astro";
+import { ViewTransitions } from "astro:transitions";
 
 interface Props {
   title: string;
   heroImage?: ImageMetadata;
+  ogImage?: string;
 }
 
-const { title, heroImage } = Astro.props;
+const { title, heroImage, ogImage } = Astro.props;
+const siteUrl = Astro.site || Astro.url.origin;
+const resolvedOgImage = ogImage ? new URL(ogImage, siteUrl) : new URL("/open-graph.png", siteUrl);
 ---
 
 <!doctype html>
@@ -19,6 +23,7 @@ const { title, heroImage } = Astro.props;
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
+    <ViewTransitions />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
@@ -30,7 +35,7 @@ const { title, heroImage } = Astro.props;
     />
     <meta
       property="og:image"
-      content={new URL("/open-graph.png", Astro.site)}
+      content={resolvedOgImage}
     />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -45,7 +50,7 @@ const { title, heroImage } = Astro.props;
     />
     <meta
       property="twitter:image"
-      content={new URL("/open-graph.png", Astro.site)}
+      content={resolvedOgImage}
     />
 
     <title>{title}</title>

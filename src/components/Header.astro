@@ -215,7 +215,7 @@ const { heroImage } = Astro.props;
 
 <script>
   // Handle Dropdown Toggles
-  document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("astro:page-load", () => {
     const dropdownTriggers = document.querySelectorAll(".dropdown-trigger");
 
     dropdownTriggers.forEach((trigger) => {

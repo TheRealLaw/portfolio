@@ -6,24 +6,33 @@ import "photoswipe/style.css";
   import PhotoSwipeLightbox from "photoswipe/lightbox";
   import PhotoSwipe from "photoswipe";
 
-  const lightbox = new PhotoSwipeLightbox({
-    gallery: "#gallery",
-    children: "a",
-    pswpModule: PhotoSwipe,
-    bgOpacity: 1.0,
-    paddingFn: (viewportSize) => {
-      // Responsive padding
-      if (viewportSize.x < 1024) {
-        // Mobile/Tablet: standard padding
-        return { top: 60, bottom: 60, left: 20, right: 20 };
-      } else {
-        // Desktop: Offset left by adding large right padding for caption
-        const rightPadding = Math.min(450, viewportSize.x * 0.3);
-        return { top: 80, bottom: 80, left: 80, right: rightPadding };
-      }
-    },
-    loop: false,
-  });
+  let lightbox: any;
+
+  document.addEventListener('astro:page-load', () => {
+    if (lightbox) {
+      try {
+        lightbox.destroy();
+      } catch (e) {}
+    }
+
+    lightbox = new PhotoSwipeLightbox({
+      gallery: "#gallery",
+      children: "a",
+      pswpModule: PhotoSwipe,
+      bgOpacity: 1.0,
+      paddingFn: (viewportSize) => {
+        // Responsive padding
+        if (viewportSize.x < 1024) {
+          // Mobile/Tablet: standard padding
+          return { top: 60, bottom: 60, left: 20, right: 20 };
+        } else {
+          // Desktop: Offset left by adding large right padding for caption
+          const rightPadding = Math.min(450, viewportSize.x * 0.3);
+          return { top: 80, bottom: 80, left: 80, right: rightPadding };
+        }
+      },
+      loop: false,
+    });
 
   lightbox.on("uiRegister", function () {
     const pswp = lightbox.pswp;
@@ -172,4 +181,5 @@ import "photoswipe/style.css";
   });
 
   lightbox.init();
+  });
 </script>

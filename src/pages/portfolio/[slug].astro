@@ -61,6 +61,8 @@ const collectionImages: {
   path: string;
 }[] = [];
 
+let coverImageSrc: string | undefined;
+
 for (const path in allImages) {
   // Check if matches /portfolio/slug/ OR /portfolio/styles/slug/
   if (
@@ -69,13 +71,15 @@ for (const path in allImages) {
   ) {
     const parts = path.split("/");
     const filename = parts[parts.length - 1];
+    const mod = allImages[path] as any;
     
-    // Skip cover images (cover.jpg, cover.png, etc.)
+    // Save cover image for OpenGraph
     if (filename.toLowerCase().startsWith("cover.")) {
+      const imgMeta = mod.default || mod;
+      coverImageSrc = imgMeta.src;
       continue;
     }
 
-    const mod = allImages[path] as any;
     collectionImages.push({
       src: mod.default || mod,
       title: filename,
@@ -203,6 +207,7 @@ const imagesWithMetadata = await Promise.all(
 
 <Layout
   title={`${slug ? slug.charAt(0).toUpperCase() + slug.slice(1) : "Collection"} | Leo Wuellner`}
+  ogImage={coverImageSrc}
 >
   <div class="mb-8">
     <h1 class="text-3xl font-bold uppercase tracking-widest">{slug}</h1>
