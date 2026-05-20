@@ -5,6 +5,7 @@ import fs from "node:fs";
 import nodePath from "node:path";
 import ExifReader from "exifreader";
 import homepageHero from "../content/portfolio/mountain view/homepage .jpg";
+import homepageHeroMobile from "../content/portfolio/mountain view/old_homepage.jpg";
 
 // Get all cover images
 const covers = import.meta.glob(
@@ -63,7 +64,7 @@ const collections = Object.keys(covers)
   .sort((a, b) => b.date.getTime() - a.date.getTime()); // Newest first
 ---
 
-<Layout title="Portfolio | Leo Wuellner" heroImage={homepageHero}>
+<Layout title="Portfolio | Leo Wuellner" heroImage={homepageHero} heroImageMobile={homepageHeroMobile}>
   <div class="flex flex-col items-center mb-12">
     <h1
       class="text-xl md:text-2xl font-normal uppercase tracking-[0.3em] text-gray-900"

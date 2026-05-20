@@ -47,9 +47,10 @@ const navItems = [
 
 interface Props {
   heroImage?: ImageMetadata;
+  heroImageMobile?: ImageMetadata;
 }
 
-const { heroImage } = Astro.props;
+const { heroImage, heroImageMobile } = Astro.props;
 ---
 
 {
@@ -58,11 +59,26 @@ const { heroImage } = Astro.props;
     <header class="w-full relative h-[85vh] min-h-[600px] mb-12 flex flex-col text-white">
       {/* Background Image */}
       <div class="absolute inset-0 z-0">
-        <img
-          src={heroImage.src}
-          alt="Hero Background"
-          class="w-full h-full object-cover"
-        />
+        {heroImageMobile ? (
+          <>
+            <img
+              src={heroImageMobile.src}
+              alt="Hero Background Mobile"
+              class="w-full h-full object-cover md:hidden"
+            />
+            <img
+              src={heroImage.src}
+              alt="Hero Background"
+              class="w-full h-full object-cover hidden md:block"
+            />
+          </>
+        ) : (
+          <img
+            src={heroImage.src}
+            alt="Hero Background"
+            class="w-full h-full object-cover"
+          />
+        )}
         <div class="absolute inset-0 bg-black/20" />{" "}
         {/* Subtle overlay for text readability */}
       </div>
@@ -129,10 +145,10 @@ const { heroImage } = Astro.props;
         </nav>
       </div>
 
-      {/* Center Branding */}
-      <div class="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 flex-grow flex items-center justify-end">
+      {/* Center/Right Branding */}
+      <div class="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 flex-grow flex items-center justify-center md:justify-end">
         <a href="/bio" class="inline-block hover:opacity-80 transition-all duration-300">
-          <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold uppercase tracking-[0.25em] text-white text-right drop-shadow-md">
+          <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold uppercase tracking-[0.25em] text-white text-center md:text-right drop-shadow-md">
             Leo Wuellner
           </h1>
         </a>

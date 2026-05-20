@@ -7,10 +7,11 @@ import { ViewTransitions } from "astro:transitions";
 interface Props {
   title: string;
   heroImage?: ImageMetadata;
+  heroImageMobile?: ImageMetadata;
   ogImage?: string;
 }
 
-const { title, heroImage, ogImage } = Astro.props;
+const { title, heroImage, heroImageMobile, ogImage } = Astro.props;
 const siteUrl = Astro.site || Astro.url.origin;
 const resolvedOgImage = ogImage ? new URL(ogImage, siteUrl) : new URL("/open-graph.png", siteUrl);
 ---
@@ -81,7 +82,7 @@ const resolvedOgImage = ogImage ? new URL(ogImage, siteUrl) : new URL("/open-gra
     </script>
   </head>
   <body class="min-h-screen flex flex-col">
-    <Header heroImage={heroImage} />
+    <Header heroImage={heroImage} heroImageMobile={heroImageMobile} />
 
     <main class="flex-grow w-full max-w-7xl mx-auto px-4 md:px-12 pb-20">
       <slot />
