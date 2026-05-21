@@ -27,11 +27,14 @@ export async function getStaticPaths() {
     const parts = path.split("/");
     // Check for standard portfolio: src/content/portfolio/[name] (parts[4])
     // Check for styles: src/content/portfolio/styles/[name] (parts[5])
+    // Check for Series: src/content/portfolio/Series/[name] (parts[5])
 
     if (parts[4] === "styles" && parts[5]) {
-      collections.add(parts[5]);
-    } else if (parts[4] && parts[4] !== "styles") {
-      collections.add(parts[4]);
+      collections.add(parts[5].trim());
+    } else if (parts[4] === "Series" && parts[5]) {
+      collections.add(parts[5].trim());
+    } else if (parts[4] && parts[4] !== "styles" && parts[4] !== "Series") {
+      collections.add(parts[4].trim());
     }
   }
 
@@ -43,14 +46,6 @@ export async function getStaticPaths() {
 const { slug } = Astro.params;
 
 // Fetch images for this collection
-// Note: We scan all and filter because import.meta.glob with template literals is tricky if not known at build time slightly differently,
-// but for getStaticPaths it worked. In the component body, we verify.
-// Actually, to get images for THIS slug, we can use a glob pattern that matches everything and filter.
-// Or we can rely on the fact that we know the slug.
-// `import.meta.glob` must have static arguments generally, but inside `getStaticPaths` we used it.
-// Here we are inside the component. We can reuse the glob from file scope or pass data.
-// Passing data via `props` in `getStaticPaths` is better.
-
 const allImages = import.meta.glob(
   "/src/content/portfolio/**/*.{jpg,png,jpeg,webp,JPG,PNG,JPEG,WEBP}",
   { eager: true },
@@ -64,12 +59,16 @@ const collectionImages: {
 let coverImageSrc: string | undefined;
 
 for (const path in allImages) {
-  // Check if matches /portfolio/slug/ OR /portfolio/styles/slug/
-  if (
-    path.includes(`/src/content/portfolio/${slug}/`) ||
-    path.includes(`/src/content/portfolio/styles/${slug}/`)
-  ) {
-    const parts = path.split("/");
+  const parts = path.split("/");
+  const p4 = parts[4]?.trim();
+  const p5 = parts[5]?.trim();
+  
+  const isMatch = 
+    (p4 === slug && p4 !== "styles" && p4 !== "Series") ||
+    (p4 === "styles" && p5 === slug) ||
+    (p4 === "Series" && p5 === slug);
+
+  if (isMatch) {
     const filename = parts[parts.length - 1];
     const mod = allImages[path] as any;
     
@@ -83,9 +82,75 @@ for (const path in allImages) {
     collectionImages.push({
       src: mod.default || mod,
       title: filename,
-      path, // Add path here
+      path,
     });
   }
+}
+
+// Roman numeral conversion helper
+function romanToDecimal(roman: string): number {
+  const romanMap: { [key: string]: number } = {
+    i: 1, v: 5, x: 10, l: 50, c: 100, d: 500, m: 1000
+  };
+  let total = 0;
+  let prevValue = 0;
+  const normalized = roman.toLowerCase().trim();
+  
+  for (let i = normalized.length - 1; i >= 0; i--) {
+    const char = normalized[i];
+    const currentValue = romanMap[char];
+    if (!currentValue) {
+      return 0;
+    }
+    if (currentValue < prevValue) {
+      total -= currentValue;
+    } else {
+      total += currentValue;
+    }
+    prevValue = currentValue;
+  }
+  return total;
+}
+
+// Extract number from filename (Roman numeral or digit)
+function getImageNumber(filename: string): number {
+  const baseName = filename.substring(0, filename.lastIndexOf('.')) || filename;
+  const trimmed = baseName.trim();
+  const words = trimmed.split(/\s+/);
+  const lastWord = words[words.length - 1];
+  
+  if (/^[ivxldcmIVXLDCM]+$/.test(lastWord)) {
+    const val = romanToDecimal(lastWord);
+    if (val > 0) return val;
+  }
+  
+  const match = trimmed.match(/\b[ivxldcmIVXLDCM]+\b/);
+  if (match) {
+    const val = romanToDecimal(match[0]);
+    if (val > 0) return val;
+  }
+  
+  const digitMatch = trimmed.match(/\d+/);
+  if (digitMatch) {
+    return parseInt(digitMatch[0], 10);
+  }
+  
+  return Infinity;
+}
+
+// Sort series collections numerically, fallback to alphabetical. Keep standard collections untouched.
+const isSeries = collectionImages.some(img => img.path.includes("/Series/"));
+if (isSeries) {
+  collectionImages.sort((a, b) => {
+    const numA = getImageNumber(a.title);
+    const numB = getImageNumber(b.title);
+    
+    if (numA !== numB) {
+      return numA - numB;
+    }
+    
+    return a.title.localeCompare(b.title);
+  });
 }
 
 // Helper to get image metadata

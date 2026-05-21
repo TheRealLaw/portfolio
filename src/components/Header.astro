@@ -11,6 +11,7 @@ const collections = Object.keys(covers)
     const parts = path.split("/");
     return parts[4];
   })
+  .filter((c) => c !== "styles" && c !== "Series") // Filter out styles and Series root folders
   .sort();
 
 const styleCovers = import.meta.glob(
@@ -23,6 +24,21 @@ const styleCollections = Object.keys(styleCovers)
     return parts[5];
   })
   .sort();
+
+const seriesImages = import.meta.glob(
+  "/src/content/portfolio/Series/**/*.{jpg,png,jpeg,webp,JPG,PNG,JPEG,WEBP}",
+  { eager: true },
+);
+const seriesCollections = Array.from(
+  new Set(
+    Object.keys(seriesImages)
+      .map((path) => {
+        const parts = path.split("/");
+        return parts[5];
+      })
+      .filter(Boolean)
+  )
+).sort();
 
 const navItems = [
   { name: "HOME", href: "/" },
@@ -38,6 +54,14 @@ const navItems = [
     name: "STYLES",
     href: "/styles",
     dropdown: styleCollections.map((c) => ({
+      name: c,
+      href: `/portfolio/${encodeURIComponent(c)}`,
+    })),
+  },
+  {
+    name: "SERIES",
+    href: "/series",
+    dropdown: seriesCollections.map((c) => ({
       name: c,
       href: `/portfolio/${encodeURIComponent(c)}`,
     })),

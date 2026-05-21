@@ -1,0 +1,143 @@
+---
+import Layout from "../layouts/Layout.astro";
+import GalleryCard from "../components/GalleryCard.astro";
+
+// Get all images from Series subfolders dynamically
+const seriesImages = import.meta.glob(
+    "/src/content/portfolio/Series/**/*.{jpg,png,jpeg,webp,JPG,PNG,JPEG,WEBP}",
+    { eager: true },
+);
+
+// Helper to convert Roman numerals to decimal
+function romanToDecimal(roman: string): number {
+  const romanMap: { [key: string]: number } = {
+    i: 1, v: 5, x: 10, l: 50, c: 100, d: 500, m: 1000
+  };
+  let total = 0;
+  let prevValue = 0;
+  const normalized = roman.toLowerCase().trim();
+  
+  for (let i = normalized.length - 1; i >= 0; i--) {
+    const char = normalized[i];
+    const currentValue = romanMap[char];
+    if (!currentValue) {
+      return 0;
+    }
+    if (currentValue < prevValue) {
+      total -= currentValue;
+    } else {
+      total += currentValue;
+    }
+    prevValue = currentValue;
+  }
+  return total;
+}
+
+// Helper to extract a number from image filename (digit or Roman numeral)
+function getImageNumber(filename: string): number {
+  const baseName = filename.substring(0, filename.lastIndexOf('.')) || filename;
+  const trimmed = baseName.trim();
+  const words = trimmed.split(/\s+/);
+  const lastWord = words[words.length - 1];
+  
+  if (/^[ivxldcmIVXLDCM]+$/.test(lastWord)) {
+    const val = romanToDecimal(lastWord);
+    if (val > 0) return val;
+  }
+  
+  const match = trimmed.match(/\b[ivxldcmIVXLDCM]+\b/);
+  if (match) {
+    const val = romanToDecimal(match[0]);
+    if (val > 0) return val;
+  }
+  
+  const digitMatch = trimmed.match(/\d+/);
+  if (digitMatch) {
+    return parseInt(digitMatch[0], 10);
+  }
+  
+  return Infinity;
+}
+
+// Group images by Series folder name
+interface SeriesData {
+  coverImage?: any;
+  images: Array<{
+    filename: string;
+    image: any;
+  }>;
+}
+
+const seriesMap = new Map<string, SeriesData>();
+
+for (const path in seriesImages) {
+    const parts = path.split("/");
+    const seriesName = parts[5]; // portfolio/Series/[name]/...
+    if (!seriesName) continue;
+
+    const filename = parts[parts.length - 1];
+    const mod = seriesImages[path] as any;
+    const image = mod.default || mod;
+
+    if (!seriesMap.has(seriesName)) {
+        seriesMap.set(seriesName, { images: [] });
+    }
+    const data = seriesMap.get(seriesName)!;
+
+    if (filename.toLowerCase().startsWith("cover.")) {
+        data.coverImage = image;
+    } else {
+        data.images.push({ filename, image });
+    }
+}
+
+// Process and sort collections
+const collections = Array.from(seriesMap.entries())
+    .map(([name, data]) => {
+        let coverImage = data.coverImage;
+
+        // If no designated cover, sort images and use the first one
+        if (!coverImage && data.images.length > 0) {
+            data.images.sort((a, b) => {
+                const numA = getImageNumber(a.filename);
+                const numB = getImageNumber(b.filename);
+                if (numA !== numB) {
+                    return numA - numB;
+                }
+                return a.filename.localeCompare(b.filename);
+            });
+            coverImage = data.images[0].image;
+        }
+
+        return {
+            name,
+            href: `/portfolio/${encodeURIComponent(name)}`,
+            image: coverImage,
+        };
+    })
+    .sort((a, b) => a.name.localeCompare(b.name));
+---
+
+<Layout title="Series | Leo Wuellner">
+    <div class="max-w-7xl mx-auto px-6 md:px-12 py-12">
+        <h1
+            class="text-4xl font-bold uppercase tracking-widest mb-12 text-center"
+        >
+            Series
+        </h1>
+
+        <div class="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8">
+            {
+                collections.map((collection) => (
+                    <div class="break-inside-avoid">
+                        <GalleryCard
+                            title={collection.name}
+                            coverImage={collection.image}
+                            href={collection.href}
+                        />
+                    </div>
+                ))
+            }
+        </div>
+    </div>
+</Layout>
