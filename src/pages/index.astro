@@ -17,7 +17,7 @@ const covers = import.meta.glob(
 const collections = Object.keys(covers)
   .map((filePath) => {
     const parts = filePath.split("/");
-    const name = parts[4];
+    const name = parts[4]?.trim();
     const coverModule = covers[filePath] as any;
     const image = coverModule.default || coverModule;
 

@@ -9,7 +9,7 @@ const covers = import.meta.glob(
 const collections = Object.keys(covers)
   .map((path) => {
     const parts = path.split("/");
-    return parts[4];
+    return parts[4]?.trim();
   })
   .filter((c) => c !== "styles" && c !== "Series") // Filter out styles and Series root folders
   .sort();
@@ -21,7 +21,7 @@ const styleCovers = import.meta.glob(
 const styleCollections = Object.keys(styleCovers)
   .map((path) => {
     const parts = path.split("/");
-    return parts[5];
+    return parts[5]?.trim();
   })
   .sort();
 
@@ -34,7 +34,7 @@ const seriesCollections = Array.from(
     Object.keys(seriesImages)
       .map((path) => {
         const parts = path.split("/");
-        return parts[5];
+        return parts[5]?.trim();
       })
       .filter(Boolean)
   )

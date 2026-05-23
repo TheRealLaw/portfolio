@@ -15,7 +15,7 @@ const covers = import.meta.glob(
 const collections = Object.keys(covers)
     .map((filePath) => {
         const parts = filePath.split("/");
-        const name = parts[5]; // portfolio/styles/[name]/cover
+        const name = parts[5]?.trim(); // portfolio/styles/[name]/cover
         const coverModule = covers[filePath] as any;
         const image = coverModule.default || coverModule;
 

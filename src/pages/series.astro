@@ -72,7 +72,7 @@ const seriesMap = new Map<string, SeriesData>();
 
 for (const path in seriesImages) {
     const parts = path.split("/");
-    const seriesName = parts[5]; // portfolio/Series/[name]/...
+    const seriesName = parts[5]?.trim(); // portfolio/Series/[name]/...
     if (!seriesName) continue;
 
     const filename = parts[parts.length - 1];
