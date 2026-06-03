@@ -14,6 +14,8 @@ interface Props {
 const { title, heroImage, heroImageMobile, ogImage } = Astro.props;
 const siteUrl = Astro.site || Astro.url.origin;
 const resolvedOgImage = ogImage ? new URL(ogImage, siteUrl) : new URL("/open-graph.png", siteUrl);
+
+const gaId = import.meta.env.PUBLIC_GA_ID;
 ---
 
 <!doctype html>
@@ -80,6 +82,29 @@ const resolvedOgImage = ogImage ? new URL(ogImage, siteUrl) : new URL("/open-gra
         "description": "Leo Wuellner is a photographer specializing in urban, landscape, and portrait photography."
       }
     </script>
+    {gaId && (
+      <>
+        <!-- Google tag (gtag.js) -->
+        <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}></script>
+        <script is:inline set:html={`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          // Configure initial page load
+          gtag('config', '${gaId}', {
+            page_path: window.location.pathname
+          });
+
+          // Track subsequent page loads under Astro View Transitions
+          document.addEventListener('astro:page-load', () => {
+            gtag('config', '${gaId}', {
+              page_path: window.location.pathname
+            });
+          });
+        `} />
+      </>
+    )}
   </head>
   <body class="min-h-screen flex flex-col">
     <Header heroImage={heroImage} heroImageMobile={heroImageMobile} />
